@@ -1,18 +1,14 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import org.usfirst.frc.team295.robot.UtilityFunctions;
+import org.usfirst.frc.team295.robot.Commands.DriveTank;
+import org.usfirst.frc.team295.robot.Utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Drivetrain {
-	
-	//Used for motor & speed controller positions, do not change
-	private static final int BACK_LEFT = 0;
-	private static final int BACK_RIGHT = 1;
-	private static final int FRONT_LEFT = 2;
-	private static final int FRONT_RIGHT = 3;
+public class Drivetrain extends Subsystem {
 	
 	//Speed controller PWM pins, change based on pins
 	private static final int SC_BACK_LEFT = 0;
@@ -23,6 +19,11 @@ public class Drivetrain {
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;
 	private RobotDrive robotDrive;
+	
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new DriveTank());
+	}
 	
 	public Drivetrain() {
 		speedControllers = new VictorSP[4];
@@ -45,12 +46,22 @@ public class Drivetrain {
 		}
 	}
 	
-	public void tankDrive(double left, double right) {
-		robotDrive.tankDrive(UtilityFunctions.deadband(right), UtilityFunctions.deadband(left));
+	public void setSpeed(double left, double right) {
+		robotDrive.setLeftRightMotorOutputs(UtilityFunctions.deadband(left), UtilityFunctions.deadband(right));
 	}
+	
+	public void tankDrive(double left, double right) {
+		robotDrive.tankDrive(UtilityFunctions.deadband(left), UtilityFunctions.deadband(right));
+	}	
 	
 	/*public void arcadeDrive(double move, double rotation) {
 		robotDrive.arcadeDrive(UtilityFunctions.deadband(move), UtilityFunctions.deadband(-rotation));
 	}*/
+	
+	//Used for motor & speed controller positions, do not change
+	private static final int BACK_LEFT = 0;
+	private static final int BACK_RIGHT = 1;
+	private static final int FRONT_LEFT = 2;
+	private static final int FRONT_RIGHT = 3;
 	
 }

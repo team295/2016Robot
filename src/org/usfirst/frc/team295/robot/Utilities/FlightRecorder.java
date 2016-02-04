@@ -1,6 +1,5 @@
-package org.usfirst.frc.team295.robot;
+package org.usfirst.frc.team295.robot.Utilities;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class FlightRecorder {
@@ -20,6 +19,7 @@ public class FlightRecorder {
 	public void write(String input) {
 		try {
 			fstream.write(input + "\n");
+			fstream.flush();
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}

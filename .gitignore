@@ -13,9 +13,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
-
-# Eclipse Core
-.project
+sysProps.xml
 
 # External tool builders
 .externalToolBuilders/

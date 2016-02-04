@@ -1,7 +1,5 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import org.usfirst.frc.team295.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 public class OI {
@@ -14,9 +12,12 @@ public class OI {
 		operator = new Joystick(1);
 	}
 	
-	public void processInputs() {
-		//Arcade RobotMap.drivetrain.tankDrive(driver.getRawAxis(1), driver.getRawAxis(5));
-		RobotMap.drivetrain.tankDrive(-driver.getRawAxis(1), -driver.getRawAxis(5));
+	public Joystick getDriverJoystick() {
+		return driver;
+	}
+	
+	public Joystick getOperatorJoystick() {
+		return operator;
 	}
 	
 }
