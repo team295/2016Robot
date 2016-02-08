@@ -1,14 +1,21 @@
-package org.usfirst.frc.team295.robot.Commands;
+package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
+import org.usfirst.frc.team295.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveTank extends Command {
-
+	
+	private Drivetrain drivetrain;
+	private Joystick driverJoystick;
+	
 	public DriveTank() {
-		requires(RobotMap.drivetrain);
+		drivetrain = RobotMap.drivetrain;
+		driverJoystick = RobotMap.oi.getDriverJoystick();
+		requires(drivetrain);
 	}
 	
 	@Override
@@ -16,8 +23,7 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void execute() {
-		RobotMap.drivetrain.tankDrive(RobotMap.oi.getDriverJoystick().getRawAxis(1),
-				RobotMap.oi.getDriverJoystick().getRawAxis(5));
+		drivetrain.tankDrive(driverJoystick.getY(Hand.kLeft), driverJoystick.getY(Hand.kRight));
 	}
 
 	@Override
@@ -27,13 +33,12 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void end() {
-		RobotMap.drivetrain.setSpeed(0, 0);
+		drivetrain.setSpeed(0, 0);
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
 	}
-
 
 }

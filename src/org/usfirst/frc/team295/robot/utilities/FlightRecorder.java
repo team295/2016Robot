@@ -1,4 +1,4 @@
-package org.usfirst.frc.team295.robot.Utilities;
+package org.usfirst.frc.team295.robot.utilities;
 
 import java.io.FileWriter;
 
@@ -25,7 +25,7 @@ public class FlightRecorder {
 		}
 	}
 	
-	public void close() {
+	public void dispose() {
 		try {
 			fstream.close();
 		} catch(Exception ex) {
