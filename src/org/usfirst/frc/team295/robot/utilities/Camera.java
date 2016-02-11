@@ -9,24 +9,21 @@ public class Camera {
 
 	Image frame;
 	
-	int currentCamera;
-	int shooterCamera;
+	CameraServer currentCamera;
+	CameraServer shooterCamera;
 	int armCamera;
 	
 	public Camera() {
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		//Find from Roborio web interface         vvvvvv
-		shooterCamera = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		//armCamera = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-
-		currentCamera = shooterCamera;
-
-		NIVision.IMAQdxConfigureGrab(currentCamera);
+		//frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		//Find from Roborio web interface         vvvvvv        
+		shooterCamera = CameraServer.getInstance();
+		shooterCamera.setQuality(50);
+		shooterCamera.startAutomaticCapture("cam0");
 	}
 	
 	public void pushImage() {
-		NIVision.IMAQdxGrab(currentCamera, frame, 1);
-		CameraServer.getInstance().setImage(frame);
+		//NIVision.IMAQdxGrab(currentCamera, frame, 1);
+		//CameraServer.getInstance().setImage(frame);
 	}
 	
 	public void switchCamera() {

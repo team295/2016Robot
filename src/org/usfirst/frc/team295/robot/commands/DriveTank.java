@@ -23,7 +23,7 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void execute() {
-		drivetrain.tankDrive(driverJoystick.getY(Hand.kLeft), driverJoystick.getY(Hand.kRight));
+		drivetrain.tankDrive(driverJoystick.getRawAxis(1), driverJoystick.getRawAxis(5));
 	}
 
 	@Override

@@ -13,9 +13,9 @@ public class Drivetrain extends Subsystem {
 	
 	//Speed controller PWM pins, change based on pins
 	private static final short BACK_LEFT_PORT = 2;
-	private static final short FRONT_LEFT_PORT = 3;
+	private static final short FRONT_LEFT_PORT = 1;
 	private static final short BACK_RIGHT_PORT = 4;
-	private static final short FRONT_RIGHT_PORT = 1;
+	private static final short FRONT_RIGHT_PORT = 3;
 	
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;

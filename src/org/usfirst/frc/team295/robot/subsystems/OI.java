@@ -17,8 +17,8 @@ public class OI {
 		driver = new Joystick(0);
 		operator = new Joystick(1);
 		
-		spinUpShooter = new JoystickButton(driver, 1);
-		spinUpShooter.whenPressed(new SpinUpShooter(0.2));
+		//spinUpShooter = new JoystickButton(driver, 1);
+		//spinUpShooter.whenPressed(new SpinUpShooter(0.4));
 	}
 	
 	public Joystick getDriverJoystick() {

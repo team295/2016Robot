@@ -14,10 +14,10 @@ public class RobotMap {
 	public static FlightRecorder flightRecorder;
 	
 	public static void init() {
-		drivetrain = new Drivetrain();
-		shooter = new Shooter(7, 0, 0.2); //TODO: Get real values
+		//drivetrain = new Drivetrain();
+		shooter = new Shooter(0, 0, 0); //TODO: Get real values (previously 7, 0, 0.2)
 		oi = new OI();
-		flightRecorder = new FlightRecorder();
+		//flightRecorder = new FlightRecorder();
 		//Camera camera = new Camera();
 	}
 	
