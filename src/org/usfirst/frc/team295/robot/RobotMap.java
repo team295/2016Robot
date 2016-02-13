@@ -1,5 +1,6 @@
 package org.usfirst.frc.team295.robot;
 
+import org.usfirst.frc.team295.robot.subsystems.Arm;
 import org.usfirst.frc.team295.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team295.robot.subsystems.OI;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
@@ -10,18 +11,21 @@ public class RobotMap {
 
 	public static Drivetrain drivetrain;
 	public static Shooter shooter;
+	public static Arm arm;
 	public static OI oi;
 	public static FlightRecorder flightRecorder;
+	public static Camera camera;
 	
 	public static void init() {
 		//drivetrain = new Drivetrain();
-		shooter = new Shooter(0, 0, 0); //TODO: Get real values (previously 7, 0, 0.2)
+		//shooter = new Shooter(0, 0, 0); //TODO: Get real values (previously 7, 0, 0.2)
+		arm = new Arm();
 		oi = new OI();
 		//flightRecorder = new FlightRecorder();
-		//Camera camera = new Camera();
+		//camera = new Camera();
 	}
 	
-	//Never gets called, find a function to put this in
+	//TODO: Never gets called, find a function to put this in
 	public static void dispose() {
 		flightRecorder.dispose();
 	}

@@ -34,7 +34,7 @@ public class SpinUpShooter extends Command {
 
 	@Override
 	protected void end() {
-		shooter.setShooterSpeed(0);
+		//shooter.setShooterSpeed(0);
 	}
 
 	@Override

@@ -13,8 +13,8 @@ public class Drive extends Command {
 	
 	public Drive(double distance) {
 		drivetrain = RobotMap.drivetrain;
-		requires(drivetrain);
 		this.distance = distance;
+		requires(drivetrain);
 	}
 	
 	@Override

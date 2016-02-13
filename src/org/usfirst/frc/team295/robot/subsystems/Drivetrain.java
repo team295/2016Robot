@@ -3,7 +3,6 @@ package org.usfirst.frc.team295.robot.subsystems;
 import org.usfirst.frc.team295.robot.commands.DriveTank;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -20,8 +19,6 @@ public class Drivetrain extends Subsystem {
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;
 	private RobotDrive robotDrive;
-	
-	private Encoder[] encoders;
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -47,8 +44,6 @@ public class Drivetrain extends Subsystem {
 		for(SpeedController sc : motors) {
 			sc.setInverted(true);
 		}
-		
-		encoders = new Encoder[4];
 	}
 	
 	public void setSpeed(double left, double right) {
@@ -59,9 +54,9 @@ public class Drivetrain extends Subsystem {
 		robotDrive.tankDrive(UtilityFunctions.deadband(left), UtilityFunctions.deadband(right));
 	}	
 	
-	/*public void arcadeDrive(double move, double rotation) {
+	public void arcadeDrive(double move, double rotation) {
 		robotDrive.arcadeDrive(UtilityFunctions.deadband(move), UtilityFunctions.deadband(-rotation));
-	}*/
+	}
 	
 	//Used as constants for motor & speed controller positions, do not change
 	private static final short BACK_LEFT = 0;
