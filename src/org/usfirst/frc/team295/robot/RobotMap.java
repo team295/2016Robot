@@ -18,7 +18,7 @@ public class RobotMap {
 	
 	public static void init() {
 		//drivetrain = new Drivetrain();
-		//shooter = new Shooter(0, 0, 0); //TODO: Get real values (previously 7, 0, 0.2)
+		//shooter = new Shooter();
 		arm = new Arm();
 		oi = new OI();
 		//flightRecorder = new FlightRecorder();

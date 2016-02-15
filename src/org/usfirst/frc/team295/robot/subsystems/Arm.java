@@ -5,20 +5,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 	
-	private static final short SHOULDER_PORT = -1;
-	private static final short ELBOW_PORT = -1;
+	private static final short SHOULDER_PORT = 10;
+	private static final short ELBOW_PORT = 11;
 	
 	private CANTalon shoulder;
 	private CANTalon elbow;
 	
 	public Arm() {
 		shoulder = new CANTalon(SHOULDER_PORT);
-		shoulder.changeControlMode(CANTalon.TalonControlMode.Position);
-		shoulder.setPID(7, 0, 0.2); //TODO: Get real values
+		shoulder.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		//shoulder.setPID(7, 0, 0.2); //TODO: Get real values
 		
 		elbow = new CANTalon(ELBOW_PORT);
-		elbow.changeControlMode(CANTalon.TalonControlMode.Position);
-		elbow.setPID(7, 0, 0.2); //TODO: Get real values
+		elbow.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		//elbow.setPID(7, 0, 0.2); //TODO: Get real values
 	}
 	
 	public void rotateShoulderAbsolute(double position) {
