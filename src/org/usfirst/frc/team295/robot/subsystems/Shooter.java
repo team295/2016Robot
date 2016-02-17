@@ -13,6 +13,14 @@ public class Shooter extends Subsystem {
 	public static final int RIGHT_SHOOTER_PORT = 17;
 	public static final int ANGLE_MOTOR_PORT = 22;
 	public static final int WEDGE_MOTOR_PORT = 6;
+
+	public static final int PICKUP = 110000;
+	public static final int LOW_SHOOT = 95000;
+	public static final int HIGH_SHOOT = 46000;
+	public static final int STORE = 10000;
+	
+	private static double ANGLE_REVERSE_LIMIT = 0;
+	private static double ANGLE_FORWARD_LIMIT = 0;
 	
 	private CANTalon leftShooter;
 	private CANTalon rightShooter;
@@ -31,37 +39,64 @@ public class Shooter extends Subsystem {
 		rightShooter.enable();
 		
 		angleMotor = new CANTalon(ANGLE_MOTOR_PORT);
-		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
 		angleMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		angleMotor.configPeakOutputVoltage(2, 2);
-		angleMotor.configEncoderCodesPerRev(1000);
-		angleMotor.setCloseLoopRampRate(0.1);
+		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+		angleMotor.configPeakOutputVoltage(3, -6);
+			
+		//_talon.configEncoderCodesPerRev(4000);
 		angleMotor.setProfile(0);
 		angleMotor.setF(0.1);
 		angleMotor.setP(0.25);
 		angleMotor.setI(0);
 		angleMotor.setD(3.2);
+
+		angleMotor.setEncPosition(0);
 		angleMotor.enable();
-		
+		try {
+			Thread.sleep(100);
+		} catch(Exception e) {
+			
+		}
+		angleMotor.set(0);
+
 		wedgeMotor = new VictorSP(WEDGE_MOTOR_PORT);
-		wedgeMotor.enableDeadbandElimination(true);
 		
 		angleOffset = angleMotor.getPosition();
+
+		ANGLE_FORWARD_LIMIT = angleOffset + 35;
+		ANGLE_REVERSE_LIMIT = angleOffset + 2;
+		
+		System.out.println(angleOffset);
+		
+		//angleMotor.setForwardSoftLimit(ANGLE_FORWARD_LIMIT);
+		//angleMotor.setReverseSoftLimit(ANGLE_REVERSE_LIMIT);
+		System.out.println((ANGLE_FORWARD_LIMIT) + " " + (ANGLE_REVERSE_LIMIT));
+		angleMotor.enableForwardSoftLimit(false);
+		angleMotor.enableReverseSoftLimit(false);
 	}
 	
 	public void setSpeed(double left, double right) {
 		leftShooter.set(UtilityFunctions.deadband(left));
-		rightShooter.set(UtilityFunctions.deadband(-right));
+		rightShooter.set(UtilityFunctions.deadband(right));
 	}
 	
 	public void setAngleRelative(double revolutions) {
-		angleMotor.set(angleMotor.getPosition() + revolutions);
-		System.out.println(getAngleRelative());
+		/*if(angleMotor.getPosition() + revolutions > ANGLE_FORWARD_LIMIT) {
+			angleMotor.set(ANGLE_FORWARD_LIMIT - 0.5);
+		} else if(angleMotor.getPosition() - revolutions < ANGLE_REVERSE_LIMIT) {
+			angleMotor.set(ANGLE_REVERSE_LIMIT + 0.5);
+		} else {*/
+
 		System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
+		angleMotor.set(angleMotor.getPosition() + revolutions);
+		//}
+		//System.out.println(getAngleRelative());
+		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
 	}
 	
 	public void setAngleAbsolute(double angle) {
 		angleMotor.set(angle);
+		System.out.println(angleMotor.getPosition() + " | " + angleMotor.getOutputVoltage());
 	}
 	
 	public void setWedgeSpeed(double speed) {
