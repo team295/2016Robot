@@ -1,41 +1,40 @@
 package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
-import org.usfirst.frc.team295.robot.subsystems.Shooter;
+import org.usfirst.frc.team295.robot.subsystems.Arm;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetShooterAngleAbsolute extends Command {
-
-	private Shooter shooter;
+public class SetArmPosition extends Command {
 	
-	private double angle;
+	private Arm arm;
+	private double position;
 	
-	public SetShooterAngleAbsolute(double angle) {
-		shooter = RobotMap.shooter;
-		requires(shooter);
-		this.angle = angle;		
+	public SetArmPosition(double position) {
+		arm = RobotMap.arm;
+		requires(arm);
+		this.position = position;
 	}
 	
 	@Override
 	protected void initialize() {
-		
+		arm.setElbowModePosition();
 	}
 
 	@Override
 	protected void execute() {
-		shooter.setAngleAbsolute(angle);
+		arm.setElbowAbsolute(position);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(shooter.getAngleAbsolute() - angle) < UtilityFunctions.encoderDeadband;
+		return Math.abs(arm.getElbowPosition() - position) < UtilityFunctions.encoderDeadband;
 	}
 
 	@Override
 	protected void end() {
-		shooter.setAngleRelative(0);
+		arm.rotateElbowRelative(0);
 	}
 
 	@Override

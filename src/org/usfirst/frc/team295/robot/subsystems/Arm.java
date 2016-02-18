@@ -1,58 +1,98 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
+import org.usfirst.frc.team295.robot.commands.ArmManual;
+
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 	
 	private static final short SHOULDER_PORT = 10;
 	private static final short ELBOW_PORT = 11;
+
+	public static final double P_ONE  = -170000 / 1.4;
+	public static final double P_TWO = -95000 / 1.4;
+	public static final double P_THREE  = 75000 / 1.4;
+	public static final double P_FOUR  = 190000 / 1.4;
 	
-	public CANTalon shoulder;
-	public CANTalon elbow;
+	private CANTalon shoulder;
+	private CANTalon elbow;
+
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new ArmManual());
+	}
 	
 	public Arm() {
 		shoulder = new CANTalon(SHOULDER_PORT);
-		shoulder.setProfile(0);
-		shoulder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		shoulder.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		shoulder.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		shoulder.changeControlMode(CANTalon.TalonControlMode.Speed);
+		shoulder.reverseSensor(false);
 
 		shoulder.configNominalOutputVoltage(+0.0f, -0.0f);
-		shoulder.configPeakOutputVoltage(+6.0f, -6.0f);
-		shoulder.configEncoderCodesPerRev(1000);
+		shoulder.configPeakOutputVoltage(+12.0f, -12.0f);
+		//_talon.reverseOutput(true);
+		//_talon.configEncoderCodesPerRev(1000);
 		
-		shoulder.setForwardSoftLimit(15);
-		shoulder.setReverseSoftLimit(-15);
-		shoulder.enableForwardSoftLimit(true);
-		shoulder.enableReverseSoftLimit(true);
-
+		shoulder.setProfile(1); //Speed
 		shoulder.setF(0.005);
 		shoulder.setP(0.02);
 		shoulder.setI(0); 
 		shoulder.setD(0.01);
 		
+		shoulder.setEncPosition(0);
+		shoulder.enable();
+		try {
+			Thread.sleep(100);
+		} catch(Exception e) {
+			
+		}
+		
 		elbow = new CANTalon(ELBOW_PORT);
-		elbow.setProfile(0);
-		elbow.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		elbow.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		elbow.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		elbow.changeControlMode(CANTalon.TalonControlMode.Speed);
+		elbow.reverseSensor(false);
 
 		elbow.configNominalOutputVoltage(+0.0f, -0.0f);
-		elbow.configPeakOutputVoltage(+6.0f, -6.0f);
-		elbow.configEncoderCodesPerRev(1000);
-		
-		elbow.setForwardSoftLimit(15);
-		elbow.setReverseSoftLimit(-15);
-		elbow.enableForwardSoftLimit(true);
-		elbow.enableReverseSoftLimit(true);
+		elbow.configPeakOutputVoltage(+12.0f, -12.0f);
+		//_talon.reverseOutput(true);
+		//_talon.configEncoderCodesPerRev(1000);
 
+		elbow.setProfile(0); //Position
+		elbow.setF(0.1);
+		elbow.setP(0.25);
+		elbow.setI(0);
+		elbow.setD(3.2);
+		
+		elbow.setProfile(1); //Speed
 		elbow.setF(0.005);
 		elbow.setP(0.02);
 		elbow.setI(0); 
 		elbow.setD(0.01);
+		
+		elbow.setEncPosition(0);
+		elbow.enable();
+		try {
+			Thread.sleep(100);
+		} catch(Exception e) {
+			
+		}
 	}
 	
-	public void rotateShoulderAbsolute(double position) {
+	public void setElbowModePosition() {
+		elbow.changeControlMode(CANTalon.TalonControlMode.Position);
+		elbow.configPeakOutputVoltage(3, -3);
+		elbow.setProfile(0);
+		elbow.set(elbow.getPosition() / 1.4);
+	}
+	
+	public void setElbowModeSpeed() {
+		elbow.changeControlMode(CANTalon.TalonControlMode.Speed);
+		elbow.configPeakOutputVoltage(12, -12);
+		elbow.setProfile(1);
+	}
+	
+	public void setShoulderAbsolute(double position) {
 		shoulder.set(position);
 	}
 	
@@ -60,7 +100,7 @@ public class Arm extends Subsystem {
 		shoulder.set(shoulder.getPosition() + amount);
 	}
 	
-	public void rotateElbowAbsolute(double position) {
+	public void setElbowAbsolute(double position) {
 		elbow.set(position);
 	}
 	
@@ -68,12 +108,12 @@ public class Arm extends Subsystem {
 		elbow.set(elbow.getPosition() + amount);
 	}
 	
-	public void zeroEncoders() {
-		
+	public double getElbowPosition() {
+		return elbow.getPosition();
 	}
 	
-	@Override
-	public void initDefaultCommand() {}
-	
+	public void zeroEncoders() {
+		
+	}	
 }
 
