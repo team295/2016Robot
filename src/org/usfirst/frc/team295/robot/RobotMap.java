@@ -17,7 +17,7 @@ public class RobotMap {
 	public static Camera camera;
 	
 	public static void init() {
-		//drivetrain = new Drivetrain();
+		drivetrain = new Drivetrain();
 		shooter = new Shooter();
 		//arm = new Arm();
 		oi = new OI();
