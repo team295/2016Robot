@@ -19,6 +19,7 @@ public class Drivetrain extends Subsystem {
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;
 	private RobotDrive robotDrive;
+	private double direction = 1; //1 = arm front; -1 = shooter front
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -51,13 +52,18 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void tankDrive(double left, double right) {
-		robotDrive.tankDrive(UtilityFunctions.deadband(left), UtilityFunctions.deadband(right));
+		robotDrive.tankDrive(this.direction * UtilityFunctions.deadband(left), this.direction * UtilityFunctions.deadband(right));
 	}	
 	
 	public void arcadeDrive(double move, double rotation) {
 		robotDrive.arcadeDrive(UtilityFunctions.deadband(move), UtilityFunctions.deadband(-rotation));
 	}
-	
+	public void setDirection(double direction){
+		this.direction = direction;
+	}
+	public double getDirection(){
+		return this.direction;
+	}
 	//Used as constants for motor & speed controller positions, do not change
 	private static final short BACK_LEFT = 0;
 	private static final short BACK_RIGHT = 1;

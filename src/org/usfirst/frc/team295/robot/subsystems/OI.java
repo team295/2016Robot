@@ -1,5 +1,7 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
+import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
+import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
 import org.usfirst.frc.team295.robot.commands.SetArmPosition;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 
@@ -61,6 +63,12 @@ public class OI {
 		
 		driverButtonA = new JoystickButton(driver, 1);
 		driverButtonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
+		
+		driverButtonB = new JoystickButton(driver, 2);
+		driverButtonB.whenPressed(new DriveShiftArm());
+		
+		driverButtonX = new JoystickButton(driver,3);
+		driverButtonX.whenPressed(new DriveShiftShooter());
 	}
 	
 	public Joystick getDriverJoystick() {
