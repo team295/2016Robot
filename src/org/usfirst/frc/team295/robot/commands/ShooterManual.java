@@ -11,6 +11,7 @@ public class ShooterManual extends Command {
 	
 	private Shooter shooter;
 	private Joystick operatorJoystick;
+	private double triggerValue;
 	
 	public ShooterManual() {
 		shooter = RobotMap.shooter;
@@ -20,13 +21,18 @@ public class ShooterManual extends Command {
 	
 	@Override
 	protected void initialize() {
-		//arm.setElbowModeSpeed();
+		
 	}
 
 	@Override
 	protected void execute() {
-		//arm.setShoulderAbsolute(-Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5)), 3) * 40000);
-		//arm.setElbowAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 3) * 80000);
+		/*if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(2)) > 0) {
+			triggerValue = (triggerValue - 0.5) * 2;
+			shooter.setSpeed(-triggerValue, -triggerValue);
+		} else if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(3)) > 0) {
+			triggerValue = (triggerValue - 0.5) * 2;
+			shooter.setSpeed(triggerValue, triggerValue);
+		}*/
 	}
 
 	@Override
@@ -36,8 +42,7 @@ public class ShooterManual extends Command {
 
 	@Override
 	protected void end() {
-		//arm.setShoulderAbsolute(0);
-		//arm.setElbowAbsolute(0);
+		
 	}
 
 	@Override

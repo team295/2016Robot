@@ -1,5 +1,6 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
+import org.usfirst.frc.team295.robot.commands.ShooterManual;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -131,6 +132,6 @@ public class Shooter extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(new ShooterManual());
 	}
 }

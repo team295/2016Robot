@@ -2,7 +2,6 @@ package org.usfirst.frc.team295.robot.subsystems;
 
 import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
 import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
-import org.usfirst.frc.team295.robot.commands.SetArmPosition;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,6 +16,8 @@ public class OI {
 	private JoystickButton driverButtonB;
 	private JoystickButton driverButtonX;
 	private JoystickButton driverButtonY;
+	private JoystickButton driverButtonLB;
+	private JoystickButton driverButtonRB;
 	
 	private JoystickButton operatorButtonA;
 	private JoystickButton operatorButtonB;
@@ -49,7 +50,7 @@ public class OI {
 			_talon.set(P_FOUR);
 		}*/
 		
-		operatorButtonA = new JoystickButton(operator, 1);
+		/*operatorButtonA = new JoystickButton(operator, 1);
 		operatorButtonA.whenPressed(new SetArmPosition(Arm.P_ONE));
 		
 		operatorButtonB = new JoystickButton(operator, 2);
@@ -59,7 +60,7 @@ public class OI {
 		operatorButtonX.whenPressed(new SetArmPosition(Arm.P_THREE));
 		
 		operatorButtonY = new JoystickButton(operator, 4);
-		operatorButtonY.whenPressed(new SetArmPosition(Arm.P_FOUR));
+		operatorButtonY.whenPressed(new SetArmPosition(Arm.P_FOUR));*/
 		
 		driverButtonA = new JoystickButton(driver, 1);
 		driverButtonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
@@ -69,6 +70,15 @@ public class OI {
 		
 		driverButtonX = new JoystickButton(driver,3);
 		driverButtonX.whenPressed(new DriveShiftShooter());
+		
+		driverButtonY = new JoystickButton(driver,4);
+		driverButtonY.whenPressed(new SetShooterAngleAbsolute(Shooter.HIGH_SHOOT));
+		
+		driverButtonLB = new JoystickButton(driver,5);
+		driverButtonLB.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
+		
+		driverButtonRB = new JoystickButton(driver,6);
+		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.PICKUP));
 	}
 	
 	public Joystick getDriverJoystick() {

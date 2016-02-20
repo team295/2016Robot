@@ -25,9 +25,4 @@ public class RobotMap {
 		//camera = new Camera();
 	}
 	
-	//TODO: Never gets called, find a function to put this in
-	public static void dispose() {
-		flightRecorder.dispose();
-	}
-	
 }

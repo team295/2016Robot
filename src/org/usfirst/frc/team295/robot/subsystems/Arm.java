@@ -112,6 +112,10 @@ public class Arm extends Subsystem {
 		return elbow.getPosition();
 	}
 	
+	public double getShoulderPosition() {
+		return shoulder.getPosition();
+	}
+	
 	public void zeroEncoders() {
 		
 	}	
