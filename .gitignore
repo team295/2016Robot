@@ -2,45 +2,45 @@
 
 ### Eclipse ###
 
-.metadata
+#.metadata
 *.class
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-sysProps.xml
+#bin/
+#tmp/
+#*.tmp
+#*.bak
+#*.swp
+#*~.nib
+#local.properties
+#.settings/
+#.loadpath
+#sysProps.xml
 
 # External tool builders
-.externalToolBuilders/
+#.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
+#*.launch
 
 # PyDev specific (Python IDE for Eclipse)
-*.pydevproject
+#*.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
-.cproject
+#.cproject
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+#.classpath
 
 # Java annotation processor (APT)
-.factorypath
+#.factorypath
 
 # PDT-specific (PHP Development Tools)
-.buildpath
+#.buildpath
 
 # sbteclipse plugin
-.target
+#.target
 
 # TeXlipse plugin
-.texlipse
+#.texlipse
 
 # STS (Spring Tool Suite)
-.springBeans
+#.springBeans

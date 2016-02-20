@@ -2,6 +2,7 @@ package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
+import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,7 +20,7 @@ public class RotateShooter extends Command {
 	
 	@Override
 	protected void initialize() {
-		
+		shooter.setAngleAbsolute(position);
 	}
 
 	@Override
@@ -29,12 +30,12 @@ public class RotateShooter extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;//(Math.abs(RobotMap.shooter.getAnglePosition()) - position < ???);
+		return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - position < UtilityFunctions.encoderDeadband);
 	}
 
 	@Override
 	protected void end() {
-		//shooter.setShooterSpeed(0);
+		shooter.setAngleAbsolute(0);
 	}
 
 	@Override

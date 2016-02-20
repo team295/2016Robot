@@ -1,6 +1,5 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -73,6 +72,21 @@ public class Shooter extends Subsystem {
 		System.out.println((ANGLE_FORWARD_LIMIT) + " " + (ANGLE_REVERSE_LIMIT));
 		angleMotor.enableForwardSoftLimit(false);
 		angleMotor.enableReverseSoftLimit(false);
+	}	
+	
+	
+	//TODO: FIX!!!! EVERYHASDKJSA !!!!
+	public void setElbowModePosition() {
+		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+		angleMotor.configPeakOutputVoltage(3, -3);
+		angleMotor.setProfile(0);
+		angleMotor.set(angleMotor.getPosition() / 1.4);
+	}
+	
+	public void setElbowModeSpeed() {
+		angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
+		angleMotor.configPeakOutputVoltage(12, -12);
+		angleMotor.setProfile(1);
 	}
 	
 	public void setSpeed(double left, double right) {

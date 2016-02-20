@@ -1,6 +1,7 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
 import org.usfirst.frc.team295.robot.commands.SetArmPosition;
+import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -21,8 +22,8 @@ public class OI {
 	private JoystickButton operatorButtonY;
 	
 	public OI() {
-		driver = new Joystick(0);
-		operator = new Joystick(1);		
+		driver = new Joystick(1);
+		operator = new Joystick(0);		
 		
 		/*buttonA = new JoystickButton(driver, 1);
 		buttonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
@@ -57,6 +58,9 @@ public class OI {
 		
 		operatorButtonY = new JoystickButton(operator, 4);
 		operatorButtonY.whenPressed(new SetArmPosition(Arm.P_FOUR));
+		
+		driverButtonA = new JoystickButton(driver, 1);
+		driverButtonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
 	}
 	
 	public Joystick getDriverJoystick() {
