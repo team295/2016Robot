@@ -30,12 +30,12 @@ public class SetShooterAngleAbsolute extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(shooter.getAngleAbsolute() - angle) < UtilityFunctions.encoderDeadband;
+		return true; //TODO: CHANGE
 	}
 
 	@Override
 	protected void end() {
-		shooter.setAngleRelative(0);
+		//shooter.setAngleRelative(0);
 	}
 
 	@Override

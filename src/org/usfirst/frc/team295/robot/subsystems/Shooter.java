@@ -14,9 +14,10 @@ public class Shooter extends Subsystem {
 	public static final int ANGLE_MOTOR_PORT = 22;
 	public static final int WEDGE_MOTOR_PORT = 6;
 
-	public static final int PICKUP = 110000;
+	public static final int PICKUP = 105000;
 	public static final int LOW_SHOOT = 95000;
-	public static final int HIGH_SHOOT = 46000;
+	public static final int HIGH_SHOOT = 28000;
+	public static final int CASTLE_SHOOT = 18175;
 	public static final int STORE = 10000;
 	
 	private static double ANGLE_REVERSE_LIMIT = 0;
@@ -32,16 +33,18 @@ public class Shooter extends Subsystem {
 	public Shooter() {
 		leftShooter = new CANTalon(LEFT_SHOOTER_PORT);
 		leftShooter.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftShooter.enableBrakeMode(true);
 		leftShooter.enable();
 
 		rightShooter = new CANTalon(RIGHT_SHOOTER_PORT);
 		rightShooter.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightShooter.enableBrakeMode(true);
 		rightShooter.enable();
 		
 		angleMotor = new CANTalon(ANGLE_MOTOR_PORT);
 		angleMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-		angleMotor.configPeakOutputVoltage(3, -6);
+		angleMotor.configPeakOutputVoltage(1.8, -3.0); //2.5, -4.4
 			
 		//_talon.configEncoderCodesPerRev(4000);
 		angleMotor.setProfile(0);
@@ -92,7 +95,7 @@ public class Shooter extends Subsystem {
 	
 	public void setSpeed(double left, double right) {
 		leftShooter.set(UtilityFunctions.deadband(left));
-		rightShooter.set(UtilityFunctions.deadband(right));
+		rightShooter.set(-UtilityFunctions.deadband(right));
 	}
 	
 	public void setAngleRelative(double revolutions) {
@@ -102,7 +105,7 @@ public class Shooter extends Subsystem {
 			angleMotor.set(ANGLE_REVERSE_LIMIT + 0.5);
 		} else {*/
 
-		System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
+		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
 		angleMotor.set(angleMotor.getPosition() + revolutions);
 		//}
 		//System.out.println(getAngleRelative());
@@ -111,7 +114,7 @@ public class Shooter extends Subsystem {
 	
 	public void setAngleAbsolute(double angle) {
 		angleMotor.set(angle);
-		System.out.println(angleMotor.getPosition() + " | " + angleMotor.getOutputVoltage());
+		//System.out.println(angleMotor.getPosition() + " | " + angleMotor.getOutputVoltage());
 	}
 	
 	public void setWedgeSpeed(double speed) {
@@ -119,7 +122,12 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void zeroAngle() {
-		angleOffset = angleMotor.getPosition();
+		angleMotor.setEncPosition(0);
+		try {
+			Thread.sleep(100);
+		} catch(Exception e) {
+			
+		}
 	}
 	
 	public double getAngleRelative() {

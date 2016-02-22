@@ -26,13 +26,24 @@ public class ShooterManual extends Command {
 
 	@Override
 	protected void execute() {
-		/*if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(2)) > 0) {
-			triggerValue = (triggerValue - 0.5) * 2;
+		if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(2)) > 0) {
+			//triggerValue = (triggerValue - 0.5) * 2;
 			shooter.setSpeed(-triggerValue, -triggerValue);
 		} else if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(3)) > 0) {
-			triggerValue = (triggerValue - 0.5) * 2;
+			//triggerValue = (triggerValue - 0.5) * 2;
 			shooter.setSpeed(triggerValue, triggerValue);
-		}*/
+		} else {
+			shooter.setSpeed(0, 0);
+		}
+		//System.out.println(triggerValue);
+		
+		if(operatorJoystick.getRawButton(5)) {
+			shooter.setWedgeSpeed(0.8);
+		} else if(operatorJoystick.getRawButton(6)) {
+			shooter.setWedgeSpeed(-0.8);
+		} else {
+			shooter.setWedgeSpeed(0);
+		}
 	}
 
 	@Override

@@ -23,6 +23,7 @@ public class Robot extends IterativeRobot {
 	
 	public void enabledInit() {
 		sessionTimer.start();
+    	RobotMap.shooter.zeroAngle();
 	}
 	
 	@Override
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
+    	System.out.println(RobotMap.shooter.getAngleAbsolute());
 	}
 
 	@Override

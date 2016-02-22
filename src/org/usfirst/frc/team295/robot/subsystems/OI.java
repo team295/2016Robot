@@ -62,11 +62,11 @@ public class OI {
 		operatorButtonY = new JoystickButton(operator, 4);
 		operatorButtonY.whenPressed(new SetArmPosition(Arm.P_FOUR));*/
 		
-		driverButtonA = new JoystickButton(driver, 1);
+		driverButtonA = new JoystickButton(driver, 1); //TODO: Change names
 		driverButtonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
 		
 		driverButtonB = new JoystickButton(driver, 2);
-		driverButtonB.whenPressed(new DriveShiftArm());
+		driverButtonB.whenPressed(new SetShooterAngleAbsolute(Shooter.CASTLE_SHOOT)); //TODO: DriveShiftArm
 		
 		driverButtonX = new JoystickButton(driver,3);
 		driverButtonX.whenPressed(new DriveShiftShooter());
