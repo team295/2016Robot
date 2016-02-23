@@ -16,8 +16,8 @@ public class Shooter extends Subsystem {
 
 	public static final int PICKUP = 105000;
 	public static final int LOW_SHOOT = 95000;
-	public static final int HIGH_SHOOT = 28000;
-	public static final int CASTLE_SHOOT = 18175;
+	public static final int HIGH_SHOOT = 25500;
+	public static final int CASTLE_SHOOT = 19400;
 	public static final int STORE = 10000;
 	
 	private static double ANGLE_REVERSE_LIMIT = 0;
