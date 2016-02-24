@@ -2,16 +2,15 @@ package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Arm;
-import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetArmPosition extends Command {
+public class SetShoulderPosition extends Command {
 	
 	private Arm arm;
 	private double position;
 	
-	public SetArmPosition(double position) {
+	public SetShoulderPosition(double position) {
 		arm = RobotMap.arm;
 		requires(arm);
 		this.position = position;
@@ -19,12 +18,13 @@ public class SetArmPosition extends Command {
 	
 	@Override
 	protected void initialize() {
-		arm.setElbowModePosition();
+		arm.setShoulderModePosition();
 	}
 
 	@Override
 	protected void execute() {
-		arm.setElbowAbsolute(position);
+		arm.setShoulderAbsolute(position);
+		System.out.println("Moving");
 	}
 
 	@Override
@@ -34,7 +34,8 @@ public class SetArmPosition extends Command {
 
 	@Override
 	protected void end() {
-		arm.rotateElbowRelative(0);
+		//arm.rotateShoulderRelative(0);//ShoulderModeSpeed();
+		arm.setShoulderModeSpeed();
 	}
 
 	@Override

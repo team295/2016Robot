@@ -1,8 +1,8 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
 import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
+import org.usfirst.frc.team295.robot.commands.SetShoulderPosition;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -50,13 +50,13 @@ public class OI {
 			_talon.set(P_FOUR);
 		}*/
 		
-		/*operatorButtonA = new JoystickButton(operator, 1);
-		operatorButtonA.whenPressed(new SetArmPosition(Arm.P_ONE));
+		operatorButtonA = new JoystickButton(operator, 1);
+		operatorButtonA.whenPressed(new SetShoulderPosition(Arm.P_ONE));
 		
 		operatorButtonB = new JoystickButton(operator, 2);
-		operatorButtonB.whenPressed(new SetArmPosition(Arm.P_TWO));
+		operatorButtonB.whenPressed(new SetShoulderPosition(Arm.P_TWO));
 		
-		operatorButtonX = new JoystickButton(operator, 3);
+		/*operatorButtonX = new JoystickButton(operator, 3);
 		operatorButtonX.whenPressed(new SetArmPosition(Arm.P_THREE));
 		
 		operatorButtonY = new JoystickButton(operator, 4);
