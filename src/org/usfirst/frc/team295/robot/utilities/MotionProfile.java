@@ -46,9 +46,40 @@ public class MotionProfile {
 		}
 	}
 	
-	//public static double[][] generateMotionProfile(int time) {
+	public static double[][] generateMotionProfile(double distance, double totalTime, double interval) {
+		double maxSpeed = (distance * 3) / (2 * totalTime);
 		
-	//}
+		int times = (int)(totalTime / interval - 4);
+		double[][] points = new double[times][3];
+		
+		int offset = 1;
+		
+		//Very beginning
+		points[0][0] = 0;
+		points[0][1] = 0;
+		points[0][2] = interval;
+		
+		//First slope
+		for(int x = 0; x < times/3; x++) {
+			points[x+offset][2] = interval;
+			points[x+offset][1] = (1.0 / (x+1)) * maxSpeed;
+			points[x+offset][0] = 0.5 * (x+1) * points[x+offset][1];
+			System.out.println(points[x+offset][0] + " " + points[x+offset][1] + " " + points[x+offset][2]);
+		}
+		times -= times/3;
+		System.out.println("-----");
+		
+		for(int x = 0; x < times/2; x++) {
+			
+		}
+		times -= times/2;
+		
+		for(int x = 0; x < times; x++) {
+			
+		}
+		
+		return points;
+	}
 	
 	private class PeriodicRunnable implements Runnable {
 		@Override

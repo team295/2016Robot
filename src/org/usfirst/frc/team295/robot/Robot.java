@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
-    	System.out.println(RobotMap.arm.getShoulderPosition());
+    	//System.out.println(RobotMap.arm.getShoulderPosition());
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void execute() {
-		drivetrain.tankDrive(-Math.pow(driverJoystick.getRawAxis(3), 1), -Math.pow(driverJoystick.getRawAxis(1), 1));
+		drivetrain.arcadeDrive(-Math.pow(driverJoystick.getRawAxis(1), 1), -Math.pow(driverJoystick.getRawAxis(2), 1));
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package org.usfirst.frc.team295.robot.utilities;
 
 public class UtilityFunctions {
 	
-	public static final int encoderDeadband = 20;
+	public static final int encoderDeadband = 400;
 	
 	private static final double deadbandValue = 0.025;
 	

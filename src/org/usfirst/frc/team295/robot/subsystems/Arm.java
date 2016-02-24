@@ -10,10 +10,10 @@ public class Arm extends Subsystem {
 	private static final short SHOULDER_PORT = 10;
 	private static final short ELBOW_PORT = 11;
 
-	public static final double P_ONE  = 10000 / 1.4; //-30000
-	public static final double P_TWO = -10000 / 1.4; //-250000
-	public static final double P_THREE  = 75000 / 1.4;
-	public static final double P_FOUR  = 190000 / 1.4;
+	public static final double P_ONE  = 60000 / 1.4;
+	public static final double P_TWO = -30000 / 1.4;
+	public static final double P_THREE  = 30000 / 1.4;
+	public static final double P_FOUR  = 60000 / 1.4;
 	
 	public CANTalon shoulder;
 	private CANTalon elbow;
@@ -32,6 +32,8 @@ public class Arm extends Subsystem {
 		shoulder.configPeakOutputVoltage(+12.0f, -12.0f);
 		shoulder.enableForwardSoftLimit(false);
 		shoulder.enableReverseSoftLimit(false);
+		shoulder.reverseSensor(false);
+		shoulder.reverseOutput(true);
 		//_talon.reverseOutput(true);
 		//_talon.configEncoderCodesPerRev(1000);
 
@@ -40,16 +42,12 @@ public class Arm extends Subsystem {
 		shoulder.setP(0.25);
 		shoulder.setI(0);
 		shoulder.setD(3.2);
-		shoulder.reverseSensor(false);
-		shoulder.reverseOutput(true);
 		
 		shoulder.setProfile(1); //Speed
 		shoulder.setF(0.005);
 		shoulder.setP(0.02);
 		shoulder.setI(0); 
 		shoulder.setD(0.01);
-		shoulder.reverseSensor(false);
-		shoulder.reverseOutput(false);
 		
 		shoulder.setEncPosition(0);
 		shoulder.enable();
@@ -97,6 +95,10 @@ public class Arm extends Subsystem {
 		elbow.set(elbow.getPosition() / 1.4);
 	}
 	
+	public double getShoulderError() {
+		return shoulder.getError();
+	}
+	
 	public void setElbowModeSpeed() {
 		elbow.changeControlMode(CANTalon.TalonControlMode.Speed);
 		elbow.configPeakOutputVoltage(12, -12);
@@ -105,10 +107,8 @@ public class Arm extends Subsystem {
 	
 	public void setShoulderModePosition() {
 		shoulder.changeControlMode(CANTalon.TalonControlMode.Position);
-		shoulder.configPeakOutputVoltage(8, -8);
+		shoulder.configPeakOutputVoltage(6, -6);
 		shoulder.setProfile(0);
-		shoulder.reverseSensor(false);
-		shoulder.reverseOutput(true);
 		//shoulder.set(elbow.getPosition() / 1.4);
 	}
 	
