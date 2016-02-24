@@ -3,63 +3,23 @@ package org.usfirst.frc.team295.robot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
-
-public class Robot extends IterativeRobot {
-	
-	CANTalon _talon = new CANTalon(1);
-	
-	public void robotInit() {
-		RobotMap.init();
-	}
-	
-    @Override
-    public void teleopPeriodic() {
-    	Scheduler.getInstance().run();
-	}
-
-	@Override
-	public void autonomousInit() {
-		
-	}
-
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
-	
-	@Override
-	public void teleopInit() {
-		
-	}
-	
-	@Override
-	public void testPeriodic() {
-		
-	}
-
-}
-
-/*package org.usfirst.frc.team295.robot;
-
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends IterativeRobot {
 
 	
-	public static final double P_ONE  = -170000 / 1.4;
-	public static final double P_TWO = -95000 / 1.4;
-	public static final double P_THREE  = 75000 / 1.4;
-	public static final double P_FOUR  = 190000 / 1.4;
+	public static final double P_ONE  = -60000 / 1.4;
+	public static final double P_TWO = -30000 / 1.4;
+	public static final double P_THREE  = 30000 / 1.4;
+	public static final double P_FOUR  = 60000 / 1.4;
 	
-	CANTalon _talon = new CANTalon(11);
+	CANTalon _talon = new CANTalon(10);
 	Joystick driver = new Joystick(0);
 	
 	public void robotInit() {
-
+		_talon.reverseSensor(false);
+		_talon.reverseOutput(true);
+		System.out.println("Reverse sensor");
 	}
 	
 	boolean pressedA = false;
@@ -90,7 +50,7 @@ public class Robot extends IterativeRobot {
 				isSpeedMode = false;
 				pressedB = true;
 				_talon.changeControlMode(CANTalon.TalonControlMode.Position);
-				_talon.configPeakOutputVoltage(3, -3);
+				_talon.configPeakOutputVoltage(6, -6);
 				_talon.setProfile(0);
 				double value = _talon.getPosition() / 1.4;
 				System.out.println("Position: " + value);
@@ -174,4 +134,3 @@ public class Robot extends IterativeRobot {
 	}
 
 }
-*/
