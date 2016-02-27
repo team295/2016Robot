@@ -46,36 +46,62 @@ public class MotionProfile {
 		}
 	}
 	
-	public static double[][] generateMotionProfile(double distance, double totalTime, double interval) {
+	public static double[][] generateMotionProfile(double distance, double totalTime, int totalPoints) {
 		double maxSpeed = (distance * 3) / (2 * totalTime);
+		 
+		int tempPoints = (int) (totalPoints - 4);
+		double interval = (double)totalTime / (totalPoints-1.0);
+		System.out.println(tempPoints);
 		
-		int times = (int)(totalTime / interval - 4);
-		double[][] points = new double[times][3];
+		double[][] points = new double[totalPoints][3];
 		
 		int offset = 1;
 		
-		//Very beginning
+		//First point at base
 		points[0][0] = 0;
 		points[0][1] = 0;
-		points[0][2] = interval;
+		points[0][2] = 0.1;
 		
-		//First slope
-		for(int x = 0; x < times/3; x++) {
-			points[x+offset][2] = interval;
-			points[x+offset][1] = (1.0 / (x+1)) * maxSpeed;
-			points[x+offset][0] = 0.5 * (x+1) * points[x+offset][1];
-			System.out.println(points[x+offset][0] + " " + points[x+offset][1] + " " + points[x+offset][2]);
-		}
-		times -= times/3;
+		System.out.println(points[0][0] + " " + points[0][1] + " " + points[0][2]);
 		System.out.println("-----");
 		
-		for(int x = 0; x < times/2; x++) {
-			
+		//First slope
+		for(int x = 0; x < tempPoints/3; x++) {
+			points[x+offset][2] = interval;
+			points[x+offset][1] = (interval * (x+1) * maxSpeed / (totalTime / 3.0));
+			points[x+offset][0] = 0.5 * points[x+offset][1] * interval * (x+1);
+			System.out.println(points[x+offset][0] + " " + points[x+offset][1] + " " + points[x+offset][2]);
 		}
-		times -= times/2;
 		
-		for(int x = 0; x < times; x++) {
-			
+		//First high vertex
+		points[tempPoints/3 + 1][2] = interval; 
+		points[tempPoints/3 + 1][1] = maxSpeed;
+		points[tempPoints/3 + 1][0] = 0.5 * totalTime / 3.0 * maxSpeed;
+		
+		System.out.println("-----");
+		System.out.println(points[tempPoints/3 + 1][0] + " " + points[tempPoints/3 + 1][1] + " " + points[tempPoints/3 + 1][2]);
+		
+		offset += tempPoints/3 + 1;
+		tempPoints -= tempPoints/3;
+		System.out.println("-----");
+		
+		//Constant velocity
+		for(int x = 0; x < tempPoints/2 + 1; x++) {
+			points[x+offset][2] = interval;
+			points[x+offset][1] = maxSpeed;
+			points[x+offset][0] = points[x+offset-1][0] + maxSpeed * interval;
+			System.out.println(points[x+offset][0] + " " + points[x+offset][1] + " " + points[x+offset][2]);
+		}
+		offset += tempPoints/2 + 1;
+		tempPoints -= tempPoints/2;
+		
+		System.out.println("-----");
+		
+		for(int x = 0; x < tempPoints + 1; x++) {
+			points[x+offset][2] = interval;
+			points[x+offset][1] = (maxSpeed + -interval * (x+1) * maxSpeed / (totalTime / 3.0));
+			points[x+offset][0] = points[(totalPoints-4)/3 + (totalPoints-4)/3 + 2][0] + 0.5 * (maxSpeed + points[x+offset][1]) * interval * (x+1);
+			System.out.println(points[x+offset][0] + " " + points[x+offset][1] + " " + points[x+offset][2]);
 		}
 		
 		return points;
