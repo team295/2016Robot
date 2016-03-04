@@ -2,6 +2,7 @@ package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
+import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,7 +31,7 @@ public class SetShooterAngleRelative extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(shooter.getAngleRelative() - angle) < 0.002;
+		return Math.abs(shooter.getAngleRelative() - angle) < UtilityFunctions.encoderFinish;
 	}
 
 	@Override

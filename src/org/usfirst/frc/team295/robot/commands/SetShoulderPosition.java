@@ -38,6 +38,7 @@ public class SetShoulderPosition extends Command {
 	@Override
 	protected boolean isFinished() {
 		return Math.abs(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5))) > 0.2;
+		//return (Math.abs(RobotMap.arm.getShoulderAbsolute()) - position < UtilityFunctions.encoderFinish);
 	}
 
 	@Override

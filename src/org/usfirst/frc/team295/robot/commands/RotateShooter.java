@@ -30,7 +30,7 @@ public class RotateShooter extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - position < UtilityFunctions.encoderDeadband);
+		return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - position < UtilityFunctions.encoderFinish);
 	}
 
 	@Override
