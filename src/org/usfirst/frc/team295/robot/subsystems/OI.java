@@ -1,6 +1,13 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
+
+import org.usfirst.frc.team295.robot.commands.AutoDrive;
+import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
+
 import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
+import org.usfirst.frc.team295.robot.commands.PIDTurnLeft;
+import org.usfirst.frc.team295.robot.commands.PIDTurnRight;
+import org.usfirst.frc.team295.robot.commands.Reset;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 import org.usfirst.frc.team295.robot.commands.SetShoulderPosition;
 
@@ -25,8 +32,8 @@ public class OI {
 	private JoystickButton operatorButtonY;
 	
 	public OI() {
-		driver = new Joystick(1);
-		operator = new Joystick(0);		
+		driver = new Joystick(0);
+		operator = new Joystick(1);		
 		
 		/*buttonA = new JoystickButton(driver, 1);
 		buttonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
@@ -62,6 +69,7 @@ public class OI {
 		operatorButtonY = new JoystickButton(operator, 4);
 		operatorButtonY.whenPressed(new SetArmPosition(Arm.P_FOUR));*/
 		
+
 		driverButtonA = new JoystickButton(driver, 1); //TODO: Change names
 		driverButtonA.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
 		
@@ -70,15 +78,21 @@ public class OI {
 		
 		//driverButtonX = new JoystickButton(driver,3);
 		//driverButtonX.whenPressed(new DriveShiftShooter());
+
+
+		driverButtonX = new JoystickButton(driver,3);
+//		driverButtonX.whenPressed(new DriveShiftShooter());
+//		driverButtonX.whenPressed(new PIDTurnRight(90));
 		
 		driverButtonY = new JoystickButton(driver,4);
-		driverButtonY.whenPressed(new SetShooterAngleAbsolute(Shooter.HIGH_SHOOT));
-		
-		driverButtonLB = new JoystickButton(driver,5);
-		driverButtonLB.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
-		
-		driverButtonRB = new JoystickButton(driver,6);
-		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.PICKUP));
+		driverButtonY.whenPressed(new Reset());
+//		driverButtonY.whenPressed(new SetShooterAngleAbsolute(Shooter.HIGH_SHOOT));
+//		
+//		driverButtonLB = new JoystickButton(driver,5);
+//		driverButtonLB.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
+//		
+//		driverButtonRB = new JoystickButton(driver,6);
+//		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.PICKUP));
 	}
 	
 	public Joystick getDriverJoystick() {
