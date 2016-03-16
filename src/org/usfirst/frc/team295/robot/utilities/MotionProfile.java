@@ -48,6 +48,7 @@ public class MotionProfile {
 	
 	//WARNING: totalPoints is bugged, only works when it's a multiple of 3, starting from 10 (ex. 10, 13, 16...)
 	public static double[][] generateMotionProfile(double distance, double totalTime, int totalPoints) {
+		assert ((totalPoints - 10) / 3.0) == 0;
 		double maxSpeed = (distance * 3) / (2 * totalTime);
 		 
 		int tempPoints = (int) (totalPoints - 4);

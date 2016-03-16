@@ -1,5 +1,6 @@
 package org.usfirst.frc.team295.robot;
 
+import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -12,6 +13,8 @@ public class Robot extends IterativeRobot {
 	private static Timer sessionTimer = null;
 	private static long sessionIteration = 0;
 	
+	UltrasonicSensors us = new UltrasonicSensors();
+	
 	static {
 		logger = FlightRecorder.getInstance();
 	}
@@ -23,7 +26,7 @@ public class Robot extends IterativeRobot {
 	
 	public void enabledInit() {
 		sessionTimer.start();
-    	RobotMap.arm.shoulder.setEncPosition(0);
+    	//RobotMap.arm.shoulder.setEncPosition(0);
 	}
 	
 	@Override
@@ -46,6 +49,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
+    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+    	//us.read();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
 	}

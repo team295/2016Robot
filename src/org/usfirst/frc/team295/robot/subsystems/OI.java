@@ -50,11 +50,11 @@ public class OI {
 			_talon.set(P_FOUR);
 		}*/
 		
-		operatorButtonA = new JoystickButton(operator, 1);
+		/*operatorButtonA = new JoystickButton(operator, 1);
 		operatorButtonA.whenPressed(new SetShoulderPosition(Arm.P_ONE));
 		
 		operatorButtonB = new JoystickButton(operator, 2);
-		operatorButtonB.whenPressed(new SetShoulderPosition(Arm.P_TWO));
+		operatorButtonB.whenPressed(new SetShoulderPosition(Arm.P_TWO));*/
 		
 		/*operatorButtonX = new JoystickButton(operator, 3);
 		operatorButtonX.whenPressed(new SetArmPosition(Arm.P_THREE));
@@ -68,8 +68,8 @@ public class OI {
 		driverButtonB = new JoystickButton(driver, 2);
 		driverButtonB.whenPressed(new SetShooterAngleAbsolute(Shooter.CASTLE_SHOOT)); //TODO: DriveShiftArm
 		
-		driverButtonX = new JoystickButton(driver,3);
-		driverButtonX.whenPressed(new DriveShiftShooter());
+		//driverButtonX = new JoystickButton(driver,3);
+		//driverButtonX.whenPressed(new DriveShiftShooter());
 		
 		driverButtonY = new JoystickButton(driver,4);
 		driverButtonY.whenPressed(new SetShooterAngleAbsolute(Shooter.HIGH_SHOOT));

@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
 
 	public static final int LEFT_SHOOTER_PORT = 15;
-	public static final int RIGHT_SHOOTER_PORT = 17;
-	public static final int ANGLE_MOTOR_PORT = 22;
+	public static final int RIGHT_SHOOTER_PORT = 22; //17
+	public static final int ANGLE_MOTOR_PORT = 17; //22
 	public static final int WEDGE_MOTOR_PORT = 6;
 
 	public static final int PICKUP = 105000;
@@ -44,7 +44,7 @@ public class Shooter extends Subsystem {
 		angleMotor = new CANTalon(ANGLE_MOTOR_PORT);
 		angleMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-		angleMotor.configPeakOutputVoltage(1.8, -3.0); //2.5, -4.4
+		angleMotor.configPeakOutputVoltage(6, -2.5); //2.5, -4.4
 			
 		//_talon.configEncoderCodesPerRev(4000);
 		angleMotor.setProfile(0);
@@ -52,7 +52,22 @@ public class Shooter extends Subsystem {
 		angleMotor.setP(0.25);
 		angleMotor.setI(0);
 		angleMotor.setD(3.2);
+		
+		angleMotor.setProfile(1); //Speed
+		angleMotor.setF(0.005);
+		angleMotor.setP(0.02);
+		angleMotor.setI(0); 
+		angleMotor.setD(0.01);
+		
+		angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
+		angleMotor.configPeakOutputVoltage(12, -12);
+		angleMotor.setProfile(1);
 
+		angleMotor.enableForwardSoftLimit(false);
+		angleMotor.enableReverseSoftLimit(false);
+		
+		angleMotor.reverseOutput(true);
+		
 		angleMotor.setEncPosition(0);
 		angleMotor.enable();
 		try {
@@ -73,9 +88,6 @@ public class Shooter extends Subsystem {
 		
 		//angleMotor.setForwardSoftLimit(ANGLE_FORWARD_LIMIT);
 		//angleMotor.setReverseSoftLimit(ANGLE_REVERSE_LIMIT);
-		System.out.println((ANGLE_FORWARD_LIMIT) + " " + (ANGLE_REVERSE_LIMIT));
-		angleMotor.enableForwardSoftLimit(false);
-		angleMotor.enableReverseSoftLimit(false);
 	}	
 	
 	
@@ -95,7 +107,7 @@ public class Shooter extends Subsystem {
 	
 	public void setSpeed(double left, double right) {
 		leftShooter.set(UtilityFunctions.deadband(left));
-		rightShooter.set(-UtilityFunctions.deadband(right));
+		rightShooter.set(UtilityFunctions.deadband(right));
 	}
 	
 	public void setAngleRelative(double revolutions) {

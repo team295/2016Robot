@@ -31,7 +31,7 @@ public class SetShooterAngleRelative extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(shooter.getAngleRelative() - angle) < UtilityFunctions.encoderFinish;
+		return true;//Math.abs(shooter.getAngleRelative() - angle) < UtilityFunctions.encoderFinish;
 	}
 
 	@Override
