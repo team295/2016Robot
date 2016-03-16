@@ -23,7 +23,7 @@ public class AutoDrive extends Command{
 		dTime = time;
 		dSpeed = speed;
 		dDirection = direction;
-		requires(RobotMap.autonomous);
+		requires(RobotMap.drivetrain);
 		
 	}
 	@Override
@@ -40,10 +40,10 @@ public class AutoDrive extends Command{
 		dDiff = dFront - ahrs.getYaw();
 		
 		if(dDirection > 0){
-			RobotMap.autonomous.drive(dSpeed, (dDiff)*Kp);
+			RobotMap.drivetrain.drive(dSpeed, (dDiff)*Kp);
 		}
 		else if(dDirection < 0){
-			RobotMap.autonomous.drive(-dSpeed, -(dDiff)*Kp);	
+			RobotMap.drivetrain.drive(-dSpeed, -(dDiff)*Kp);	
 		}
 		System.out.println("Direction : " + dDirection + "Yaw : " + ahrs.getYaw() + " Speed : " + dSpeed);
 		
@@ -64,7 +64,7 @@ public class AutoDrive extends Command{
 	protected void end() {
 		// TODO Auto-generated method stub
 
-		RobotMap.autonomous.drive(0, 0);
+		RobotMap.drivetrain.drive(0, 0);
 	}
 
 	@Override

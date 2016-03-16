@@ -76,7 +76,7 @@ public class OI {
 		
 		driverButtonX = new JoystickButton(driver,3);
 //		driverButtonX.whenPressed(new DriveShiftShooter());
-		driverButtonX.whenPressed(new PIDTurnRight(90));
+//		driverButtonX.whenPressed(new PIDTurnRight(90));
 		
 		driverButtonY = new JoystickButton(driver,4);
 		driverButtonY.whenPressed(new Reset());

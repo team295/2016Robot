@@ -26,11 +26,9 @@ public class Autonomous extends PIDSubsystem{
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-//		setDefaultCommand(new Logger());
+
 	}
-	public void drive(double magnitude, double curve){
-		drivetrain.drive(magnitude, curve);
-	}
+
 	@Override
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
