@@ -59,6 +59,10 @@ public class Drivetrain extends Subsystem {
 		}
 	}	
 	
+	public void drive(double magnitiude, double curve){
+		robotDrive.drive(magnitiude, curve);
+	}
+	
 	public void arcadeDrive(double move, double rotation) {
 		robotDrive.arcadeDrive(UtilityFunctions.deadband(move), UtilityFunctions.deadband(-rotation));
 	}
