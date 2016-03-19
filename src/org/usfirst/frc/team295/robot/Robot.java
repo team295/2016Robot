@@ -13,6 +13,7 @@ public class Robot extends IterativeRobot {
 	private static Timer sessionTimer = null;
 	private static long sessionIteration = 0;
 	
+	
 	UltrasonicSensors us = new UltrasonicSensors();
 	
 	static {
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
+		
 	}
 	
 	public void enabledInit() {
@@ -50,6 +52,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
+    	
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//us.read();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
@@ -71,11 +74,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		enabledInit();
+		//Move to Auto Init
+		
+		RobotMap.autonomous.startHeading = RobotMap.ahrs.getAngle();
+		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
 	}
 	
 	@Override
 	public void testPeriodic() {
-		
+		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
 	}
 	
 	/**

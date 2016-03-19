@@ -4,23 +4,27 @@ import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SetShooterAngleAbsolute extends Command {
 
 	private Shooter shooter;
-	
+
 	private double angle;
+	private double startTime;
 	
 	public SetShooterAngleAbsolute(double angle) {
 		shooter = RobotMap.shooter;
 		requires(shooter);
 		this.angle = angle;		
+		
 	}
 	
 	@Override
 	protected void initialize() {
-		
+
+		startTime = Timer.getFPGATimestamp();
 	}
 
 	@Override
@@ -30,7 +34,8 @@ public class SetShooterAngleAbsolute extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return true; //TODO: CHANGE
+		return (Timer.getFPGATimestamp()- 2 > startTime);
+		 //TODO: CHANGE
 		//return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - angle < UtilityFunctions.encoderFinish);
 	}
 

@@ -15,36 +15,52 @@ public class Drivetrain extends Subsystem {
 	private static final short FRONT_LEFT_PORT = 1;
 	private static final short BACK_RIGHT_PORT = 4;
 	private static final short FRONT_RIGHT_PORT = 3;
+
+	public static VictorSP victorLeftBack;
+	public static VictorSP victorLeftFront;
+	public static VictorSP victorRightFront;
+	public static VictorSP victorRightBack;
 	
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;
-	private RobotDrive robotDrive;
+	public RobotDrive robotDrive;
 	private int direction = 1; //1 = arm front; -1 = shooter front
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new DriveTank());
+//		setDefaultCommand(new DriveTank());
 	}
 	
 	public Drivetrain() {
-		speedControllers = new VictorSP[4];
-		speedControllers[BACK_LEFT] = new VictorSP(BACK_LEFT_PORT);
-		speedControllers[BACK_RIGHT] = new VictorSP(BACK_RIGHT_PORT);
-		speedControllers[FRONT_LEFT] = new VictorSP(FRONT_LEFT_PORT);
-		speedControllers[FRONT_RIGHT] = new VictorSP(FRONT_RIGHT_PORT);
+		victorLeftBack = new VictorSP(BACK_LEFT_PORT);
+    	victorLeftFront = new VictorSP(FRONT_LEFT_PORT);
+    	victorRightFront = new VictorSP(FRONT_RIGHT_PORT);
+    	victorRightBack = new VictorSP(BACK_RIGHT_PORT);
+    	robotDrive = new RobotDrive(
+    	        	victorLeftBack,
+    	        	victorLeftFront,
+    	        	victorRightFront,
+    	        	victorRightBack
+    	  		); 
+    	robotDrive.setSafetyEnabled(false);
+//		speedControllers = new VictorSP[4];
+//		speedControllers[BACK_LEFT] = new VictorSP(BACK_LEFT_PORT);
+//		speedControllers[BACK_RIGHT] = new VictorSP(BACK_RIGHT_PORT);
+//		speedControllers[FRONT_LEFT] = new VictorSP(FRONT_LEFT_PORT);
+//		speedControllers[FRONT_RIGHT] = new VictorSP(FRONT_RIGHT_PORT);
+//		
+//		motors = new SpeedController[4];
+//		
+//		for(int x = 0; x < 4; x++) {
+//			motors[x] = speedControllers[x];
+//		}
+//		
+//		robotDrive = new RobotDrive(motors[FRONT_LEFT], motors[BACK_LEFT], 
+//				motors[FRONT_RIGHT], motors[BACK_RIGHT]);
 		
-		motors = new SpeedController[4];
-		
-		for(int x = 0; x < 4; x++) {
-			motors[x] = speedControllers[x];
-		}
-		
-		robotDrive = new RobotDrive(motors[FRONT_LEFT], motors[BACK_LEFT], 
-				motors[FRONT_RIGHT], motors[BACK_RIGHT]);
-		
-		for(SpeedController sc : motors) {
-			sc.setInverted(true);
-		}
+//		for(SpeedController sc : motors) {
+//			sc.setInverted(true);
+//		}
 	}
 	
 	public void setSpeed(double left, double right) {
