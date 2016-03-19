@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
 		logger = FlightRecorder.getInstance();
 	}
 	
+	
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
@@ -49,10 +50,11 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
-    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+//    	System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//us.read();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
+//    	System.out.println(RobotMap.shooter.getAngleAbsolute());
 	}
 
 	@Override

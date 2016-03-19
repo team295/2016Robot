@@ -45,7 +45,7 @@ public class ShooterManual extends Command {
 			shooter.setWedgeSpeed(0);
 		}
 		
-		shooter.setAngleAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 1) * 30000);
+		//shooter.setAngleAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 1) * 30000);
 		//shooter.setAngleAbsolute(operatorJoystick.getRawAxis(1) * 500 + shooter.getAngleAbsolute());
 	}
 

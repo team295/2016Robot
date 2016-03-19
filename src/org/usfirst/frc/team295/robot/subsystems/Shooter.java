@@ -14,11 +14,11 @@ public class Shooter extends Subsystem {
 	public static final int ANGLE_MOTOR_PORT = 17; //22
 	public static final int WEDGE_MOTOR_PORT = 6;
 
-	public static final int PICKUP = 105000;
-	public static final int LOW_SHOOT = 95000;
-	public static final int HIGH_SHOOT = 25500;
-	public static final int CASTLE_SHOOT = 19400;
-	public static final int STORE = 10000;
+	public static final int PICKUP = 90000; //105000
+	public static final int LOW_SHOOT = 80000; //95000
+	public static final int HIGH_SHOOT = 25500; //25500
+	public static final int CASTLE_SHOOT = 19400; //19400
+	public static final int STORE = 10000; //10000
 	
 	private static double ANGLE_REVERSE_LIMIT = 0;
 	private static double ANGLE_FORWARD_LIMIT = 0;
@@ -44,7 +44,7 @@ public class Shooter extends Subsystem {
 		angleMotor = new CANTalon(ANGLE_MOTOR_PORT);
 		angleMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-		angleMotor.configPeakOutputVoltage(6, -2.5); //2.5, -4.4
+		angleMotor.configPeakOutputVoltage(4.4, -2.2); //2.5, -4.4
 			
 		//_talon.configEncoderCodesPerRev(4000);
 		angleMotor.setProfile(0);
@@ -53,7 +53,7 @@ public class Shooter extends Subsystem {
 		angleMotor.setI(0);
 		angleMotor.setD(3.2);
 		
-		angleMotor.setProfile(1); //Speed
+		/*angleMotor.setProfile(1); //Speed
 		angleMotor.setF(0.005);
 		angleMotor.setP(0.02);
 		angleMotor.setI(0); 
@@ -61,7 +61,7 @@ public class Shooter extends Subsystem {
 		
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 		angleMotor.configPeakOutputVoltage(12, -12);
-		angleMotor.setProfile(1);
+		angleMotor.setProfile(1);*/
 
 		angleMotor.enableForwardSoftLimit(false);
 		angleMotor.enableReverseSoftLimit(false);

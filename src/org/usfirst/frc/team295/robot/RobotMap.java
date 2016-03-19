@@ -25,11 +25,11 @@ public class RobotMap {
 	
 	public static void init() {
 		drivetrain = new Drivetrain();
-		autonomous = new Autonomous();
+		//autonomous = new Autonomous();
 		shooter = new Shooter();
-		//arm = new Arm();
+		arm = new Arm();
 		oi = new OI();
-		ahrs = new AHRS(SPI.Port.kMXP);
+		//ahrs = new AHRS(SPI.Port.kMXP);
 		//flightRecorder = new FlightRecorder();
 		//camera = new Camera();
 	}
