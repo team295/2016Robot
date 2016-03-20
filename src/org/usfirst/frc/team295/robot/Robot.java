@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		sessionTimer.reset();
 		sessionIteration = 0;
 
-	}	
+	}
 	
 	public void enabledPeriodic() {
 		sessionIteration++;
@@ -50,11 +50,13 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
+    	System.out.println(RobotMap.arm.getShoulderPosition());
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//us.read();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+    	logger.log();
 	}
 
 	@Override

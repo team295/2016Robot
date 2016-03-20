@@ -23,7 +23,7 @@ public class FlightRecorder {
 	
 	public static final String LOGGER_LOGDIR = "/home/lvuser/logs/";
 	public static final String LOGGER_DELIMITER = ";";
-	public static final String HEADER = "time;shooterAngle";
+	public static final String HEADER = "time;shoulderAngle;elbowAngle";
 	
 	private static FlightRecorder singleton = null;
 	
@@ -96,10 +96,10 @@ public class FlightRecorder {
 			outputWriter.newLine();
 			outputWriter.flush();*/
 			
-			outputWriter.write(Double.toString(Robot.getTimerValue()) + LOGGER_DELIMITER + 
-					//RobotMap.arm.getElbowPosition() + LOGGER_DELIMITER + 
-					//RobotMap.arm.getShoulderPosition() + LOGGER_DELIMITER + 
-					RobotMap.shooter.getAngleAbsolute());
+			outputWriter.write(Double.toString(Robot.getTimerValue()) + LOGGER_DELIMITER +
+					RobotMap.arm.getShoulderPosition() + LOGGER_DELIMITER + 
+					RobotMap.arm.getElbowPosition() + LOGGER_DELIMITER); 
+					//RobotMap.shooter.getAngleAbsolute());
 			outputWriter.newLine();
 			outputWriter.flush();
 			

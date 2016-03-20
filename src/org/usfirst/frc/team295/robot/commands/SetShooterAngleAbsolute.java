@@ -30,8 +30,9 @@ public class SetShooterAngleAbsolute extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return true; //TODO: CHANGE
+		//return true; //TODO: CHANGE
 		//return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - angle < UtilityFunctions.encoderFinish);
+		return Math.abs(RobotMap.shooter.getAngleAbsolute() - (angle * 1.0)) < UtilityFunctions.encoderFinish;
 	}
 
 	@Override
