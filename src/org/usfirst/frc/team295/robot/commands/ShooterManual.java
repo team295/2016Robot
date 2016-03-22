@@ -4,6 +4,7 @@ import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -26,7 +27,7 @@ public class ShooterManual extends Command {
 
 	@Override
 	protected void execute() {
-		if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(2)) > 0) {
+		/*if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(2)) > 0) {
 			//triggerValue = (triggerValue - 0.5) * 2;
 			shooter.setSpeed(-triggerValue, -triggerValue);
 		} else if(UtilityFunctions.deadband(triggerValue = operatorJoystick.getRawAxis(3)) > 0) {
@@ -43,8 +44,43 @@ public class ShooterManual extends Command {
 			shooter.setWedgeSpeed(-0.8);
 		} else {
 			shooter.setWedgeSpeed(0);
+		}*/
+		
+		if(operatorJoystick.getRawButton(9)) {
+			shooter.setSpeed(1, 1);
+		} else if(operatorJoystick.getRawButton(12)) {
+			shooter.setSpeed(-1, -1);
+		} else {
+			shooter.setSpeed(0, 0);
 		}
 		
+		//shooter.setSpeed(1, 1);
+		
+		if(operatorJoystick.getRawButton(10)) {
+			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
+			shooter.angleMotor.configPeakOutputVoltage(12, -12);
+			shooter.angleMotor.setProfile(1);
+			shooter.setAngleAbsolute(10000);
+		} else if(operatorJoystick.getRawButton(11)) {
+			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
+			shooter.angleMotor.configPeakOutputVoltage(12, -12);
+			shooter.angleMotor.setProfile(1);
+			shooter.setAngleAbsolute(-20000);
+		} else {
+			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
+			shooter.angleMotor.configPeakOutputVoltage(5.8, -2.2);
+			shooter.angleMotor.setProfile(0);
+			shooter.setAngleRelative(0);
+		}
+		
+		if(operatorJoystick.getRawButton(13)) {
+			shooter.setWedgeSpeed(-0.8);
+		} else if(operatorJoystick.getRawButton(14)) {
+			shooter.setWedgeSpeed(0.8);
+		} else {
+			shooter.setWedgeSpeed(0);
+		}
+ 		
 		//shooter.setAngleAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 1) * 30000);
 		//shooter.setAngleAbsolute(operatorJoystick.getRawAxis(1) * 500 + shooter.getAngleAbsolute());
 	}

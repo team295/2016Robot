@@ -28,8 +28,10 @@ public class RobotMap {
 		//autonomous = new Autonomous();
 		shooter = new Shooter();
 		arm = new Arm();
+		ahrs = new AHRS(SPI.Port.kMXP);
+		autonomous = new Autonomous();
 		oi = new OI();
-		//ahrs = new AHRS(SPI.Port.kMXP);
+		
 		//flightRecorder = new FlightRecorder();
 		//camera = new Camera();
 	}

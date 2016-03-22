@@ -25,7 +25,7 @@ public class Shooter extends Subsystem {
 	
 	private CANTalon leftShooter;
 	private CANTalon rightShooter;
-	private CANTalon angleMotor;
+	public CANTalon angleMotor;
 	private VictorSP wedgeMotor;
 	
 	private double angleOffset;
@@ -44,7 +44,7 @@ public class Shooter extends Subsystem {
 		angleMotor = new CANTalon(ANGLE_MOTOR_PORT);
 		angleMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-		angleMotor.configPeakOutputVoltage(4.4, -2.2); //2.5, -4.4
+		angleMotor.configPeakOutputVoltage(5.8, -2.2); //2.5, -4.4
 			
 		//_talon.configEncoderCodesPerRev(4000);
 		angleMotor.setProfile(0);
@@ -53,7 +53,7 @@ public class Shooter extends Subsystem {
 		angleMotor.setI(0);
 		angleMotor.setD(3.2);
 		
-		/*angleMotor.setProfile(1); //Speed
+		angleMotor.setProfile(1); //Speed
 		angleMotor.setF(0.005);
 		angleMotor.setP(0.02);
 		angleMotor.setI(0); 
@@ -61,7 +61,7 @@ public class Shooter extends Subsystem {
 		
 		angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 		angleMotor.configPeakOutputVoltage(12, -12);
-		angleMotor.setProfile(1);*/
+		angleMotor.setProfile(1);
 
 		angleMotor.enableForwardSoftLimit(false);
 		angleMotor.enableReverseSoftLimit(false);
@@ -118,7 +118,7 @@ public class Shooter extends Subsystem {
 		} else {*/
 
 		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
-		angleMotor.set(angleMotor.getPosition() + revolutions);
+		angleMotor.set(angleMotor.getPosition() / 1.4);
 		//}
 		//System.out.println(getAngleRelative());
 		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
@@ -142,8 +142,12 @@ public class Shooter extends Subsystem {
 		}
 	}
 	
+	public CANTalon getAngleMotor() {
+		return angleMotor;
+	}
+	
 	public double getAngleRelative() {
-		return angleMotor.getPosition() - angleOffset;
+		return angleMotor.getPosition();
 	}
 	
 	public double getAngleAbsolute() {

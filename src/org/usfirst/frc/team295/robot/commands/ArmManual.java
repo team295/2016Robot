@@ -25,8 +25,24 @@ public class ArmManual extends Command {
 
 	@Override
 	protected void execute() {
-		arm.setShoulderAbsolute(-Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5)), 1) * 30000);
-		arm.setElbowAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 3) * 40000);
+		//arm.setShoulderAbsolute(-Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5)), 1) * 30000);
+		//arm.setElbowAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 3) * 40000);
+		
+		if(operatorJoystick.getRawButton(2)) {
+			arm.setShoulderAbsolute(-15000);
+		} else if(operatorJoystick.getRawButton(1)) {
+			arm.setShoulderAbsolute(15000);
+		} else {
+			arm.setShoulderAbsolute(0);
+		}
+		
+		if(operatorJoystick.getRawButton(16)) {
+			arm.setElbowAbsolute(20000);
+		} else if(operatorJoystick.getRawButton(15)) {
+			arm.setElbowAbsolute(-20000);
+		} else {
+			arm.setElbowAbsolute(0);
+		}
 	}
 
 	@Override

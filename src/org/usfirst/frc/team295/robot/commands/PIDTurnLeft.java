@@ -3,7 +3,6 @@ package org.usfirst.frc.team295.robot.commands;
 import org.usfirst.frc.team295.robot.Robot;
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Autonomous;
-import org.usfirst.frc.team295.robot.subsystems.Drivetrain;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -68,32 +67,22 @@ public class PIDTurnLeft extends Command{
 		}
 		RobotMap.autonomous.setSetpoint(dpointAngle);
 	
-//		Logger.getInstance().log("PIDTurnLeft", 
-//				Double.toString(Timer.getFPGATimestamp() - startTimeForTimer),
-//				Double.toString(Robot.drivetrain.getPIDController().get()),
-//				Double.toString(dAngle),
-//				Double.toString(ahrs.getRawAccelX()),
-//				Double.toString(ahrs.getRawAccelY()),
-//				Double.toString(Robot.drivetrain.getPIDController().getP()),
-//				Double.toString(Robot.drivetrain.getPIDController().getI()),
-//				Double.toString(Robot.drivetrain.getPIDController().getD())
-//		);
-//		System.out.println("Start time for Timer: " + startTimeForTimer);
-//		System.out.println(Robot.getTimerValue());
-		System.out.println(
-				"Done ? : " + done +
-				" Error : " + " " + 
-				"Speed : " + RobotMap.autonomous.getPIDController().get()
-				+ " DiffAngle : " + (dpointAngle - dAngle) + " DiffTotal : " + (dendAngle - dAngle) + " Current Angle : " + dAngle + " End Angle: " 
-				+ dendAngle + " dpointAngle : " + dpointAngle);
-//	
+		
+		System.out.println("Left " +" Time: " + (Robot.getTimerValue()-startTimeForTimer) +  
+				 " Done ? : " + done + " Error : " 
+				+ RobotMap.autonomous.getError() + " " + "Speed : "
+				+ RobotMap.autonomous.getPIDController().get()
+				+ " DiffAngle : " + (dpointAngle - dAngle) + " DiffTotal : " 
+				+ (dendAngle - dAngle) + " Current Angle : " + dAngle + " End Angle: " 
+				+ dendAngle + " dpointAngle : " + dpointAngle + " PID C Pos. : " + RobotMap.autonomous.getPosition());
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		if(done && RobotMap.autonomous.onTarget() || Math.abs(ahrs.getAngle() - dendAngle) <1){
-//			Globals.dError = dendAngle-ahrs.getAngle();
+		if(done && RobotMap.autonomous.onTarget() || Math.abs(ahrs.getAngle() - dendAngle) <2){
+			System.out.println("This turn is done");
+			RobotMap.autonomous.setError(dendAngle-ahrs.getAngle());
 			return true;
 		}
 		return false;

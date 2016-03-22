@@ -1,5 +1,6 @@
 package org.usfirst.frc.team295.robot;
 
+import org.usfirst.frc.team295.robot.commands.CrossDrawbridge;
 import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
 
@@ -12,6 +13,7 @@ public class Robot extends IterativeRobot {
 	private static FlightRecorder logger = null;
 	private static Timer sessionTimer = null;
 	private static long sessionIteration = 0;
+	
 	
 	UltrasonicSensors us = new UltrasonicSensors();
 	
@@ -50,7 +52,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
-    	System.out.println(RobotMap.arm.getShoulderPosition());
+    	
+    	System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
+    	
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//us.read();
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
@@ -73,11 +77,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		enabledInit();
+		//Move to Auto Init
+		
+		RobotMap.autonomous.startHeading = RobotMap.ahrs.getAngle();
+		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
 	}
 	
 	@Override
 	public void testPeriodic() {
-		
+		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
 	}
 	
 	/**

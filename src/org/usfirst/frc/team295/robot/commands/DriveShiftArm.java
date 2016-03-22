@@ -17,8 +17,8 @@ public class DriveShiftArm extends Command{
 
 	@Override
 	protected void execute() {
-		RobotMap.drivetrain.setDirection(1);
-		System.out.println("DriveForward : " + RobotMap.drivetrain.getDirection());
+		RobotMap.drivetrain.setDirection((int)(RobotMap.drivetrain.getDirection() * -1));
+		//System.out.println("DriveForward : " + RobotMap.drivetrain.getDirection());
 	}
 
 	@Override

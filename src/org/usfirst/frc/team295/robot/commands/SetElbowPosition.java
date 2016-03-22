@@ -6,12 +6,12 @@ import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetArmPosition extends Command {
+public class SetElbowPosition extends Command {
 	
 	private Arm arm;
 	private double position;
 	
-	public SetArmPosition(double position) {
+	public SetElbowPosition(double position) {
 		arm = RobotMap.arm;
 		requires(arm);
 		this.position = position;
