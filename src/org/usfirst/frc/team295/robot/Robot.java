@@ -1,11 +1,14 @@
 package org.usfirst.frc.team295.robot;
 
-import org.usfirst.frc.team295.robot.commands.CrossDrawbridge;
+import org.usfirst.frc.team295.robot.commands.AutoDrive;
+import org.usfirst.frc.team295.robot.commands.AutonomousSequence;
 import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
@@ -16,6 +19,8 @@ public class Robot extends IterativeRobot {
 	
 	
 	UltrasonicSensors us = new UltrasonicSensors();
+	CommandGroup autosequence;
+	Command driveStraight;
 	
 	static {
 		logger = FlightRecorder.getInstance();
@@ -25,10 +30,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
+		autosequence =  new AutonomousSequence();
+		driveStraight = new AutoDrive(1, .5, 1);
 	}
 	
 	public void enabledInit() {
 		sessionTimer.start();
+		RobotMap.autonomous.startHeading = RobotMap.ahrs.getAngle();
     	//RobotMap.arm.shoulder.setEncPosition(0);
 	}
 	
@@ -46,6 +54,7 @@ public class Robot extends IterativeRobot {
 	public void enabledPeriodic() {
 		sessionIteration++;
 		log();
+//		System.out.println(RobotMap.shooter.getAngleMotor().get());
 	}
 	
     @Override
@@ -56,6 +65,7 @@ public class Robot extends IterativeRobot {
     	//System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
     	
     	//System.out.println(RobotMap.us.read());
+//    	System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
     	
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//us.read();
@@ -68,6 +78,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		enabledInit();
+//		if (autonomousCommand != null) autonomousCommand.start();
+//		if(autosequence != null) autosequence.start();
+		if(driveStraight !=null) driveStraight.start(); driveStraight.cancel(); driveStraight.start();
 	}
 
 	@Override
@@ -81,10 +94,13 @@ public class Robot extends IterativeRobot {
 		enabledInit();
 		//Move to Auto Init
 		
-		RobotMap.autonomous.startHeading = RobotMap.ahrs.getAngle();
-		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
+		
+//		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
 	}
-	
+	@Override
+	public void testInit(){
+		
+	}
 	@Override
 	public void testPeriodic() {
 		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
