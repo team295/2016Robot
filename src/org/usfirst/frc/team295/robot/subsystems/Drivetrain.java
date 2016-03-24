@@ -24,6 +24,7 @@ public class Drivetrain extends Subsystem {
 	private VictorSP[] speedControllers;
 	private SpeedController[] motors;
 	public RobotDrive robotDrive;
+	public boolean isTeleop = false;
 	private int direction = 1; //1 = arm front; -1 = shooter front
 	
 	@Override
@@ -88,6 +89,7 @@ public class Drivetrain extends Subsystem {
 	public double getDirection(){
 		return this.direction;
 	}
+	
 	//Used as constants for motor & speed controller positions, do not change
 	private static final short BACK_LEFT = 0;
 	private static final short BACK_RIGHT = 1;

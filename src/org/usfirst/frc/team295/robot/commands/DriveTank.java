@@ -1,5 +1,6 @@
 package org.usfirst.frc.team295.robot.commands;
 
+import org.usfirst.frc.team295.robot.Robot;
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Drivetrain;
 
@@ -15,6 +16,7 @@ public class DriveTank extends Command {
 		drivetrain = RobotMap.drivetrain;
 		driverJoystick = RobotMap.oi.getDriverJoystick();
 		requires(drivetrain);
+		
 	}
 	
 	@Override
@@ -22,6 +24,7 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void execute() {
+		if(RobotMap.drivetrain.isTeleop)
 		drivetrain.arcadeDrive(-Math.pow(driverJoystick.getRawAxis(1), 1), Math.pow(driverJoystick.getRawAxis(4), 1));
 	}
 
@@ -32,7 +35,7 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void end() {
-		drivetrain.setSpeed(0, 0);
+//		drivetrain.setSpeed(0, 0);
 	}
 
 	@Override
