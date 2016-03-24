@@ -43,13 +43,13 @@ public class AutoDrive extends Command{
 		dDiff = dFront - ahrs.getYaw();
 		if(dDirection > 0){
 			dKpDiff = (dDiff)*Kp;
-			RobotMap.drivetrain.drive(dSpeed, dKpDiff);
+			RobotMap.autonomous.drive(dSpeed, dKpDiff);
 		}
 		else if(dDirection < 0){
 			dKpDiff = -(dDiff)*Kp;
-			RobotMap.drivetrain.drive(-dSpeed, dKpDiff);	
+			RobotMap.autonomous.drive(-dSpeed, dKpDiff);	
 		}
-		System.out.println("Error : " + dDiff + "Error*KP : " + dKpDiff);
+		System.out.println("Error : " + dDiff + "Error*KP : " + dKpDiff + "dSpeed : " + dSpeed);
 	}
 
 	@Override
@@ -68,7 +68,6 @@ public class AutoDrive extends Command{
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-		SmartDashboard.putBoolean("Doing it", false);
 		RobotMap.autonomous.drive(0, 0);
 	}
 

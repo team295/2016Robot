@@ -25,7 +25,6 @@ public class RobotMap {
 	
 	public static void init() {
 		drivetrain = new Drivetrain();
-		//autonomous = new Autonomous();
 		shooter = new Shooter();
 		arm = new Arm();
 		ahrs = new AHRS(SPI.Port.kMXP);
