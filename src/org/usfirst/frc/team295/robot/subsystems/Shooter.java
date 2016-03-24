@@ -4,6 +4,7 @@ import org.usfirst.frc.team295.robot.commands.ShooterManual;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -28,9 +29,13 @@ public class Shooter extends Subsystem {
 	public CANTalon angleMotor;
 	private VictorSP wedgeMotor;
 	
+	public DigitalInput wedgeSensor;
+	
 	private double angleOffset;
 	
 	public Shooter() {
+		wedgeSensor = new DigitalInput(4);
+		
 		leftShooter = new CANTalon(LEFT_SHOOTER_PORT);
 		leftShooter.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		leftShooter.enableBrakeMode(true);

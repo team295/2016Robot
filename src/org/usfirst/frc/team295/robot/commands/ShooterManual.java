@@ -73,13 +73,21 @@ public class ShooterManual extends Command {
 			shooter.setAngleRelative(0);
 		}
 		
-		if(operatorJoystick.getRawButton(13)) {
-			shooter.setWedgeSpeed(-0.8);
+		if(!RobotMap.shooter.wedgeSensor.get()) {
+			shooter.setWedgeSpeed(-0.4);
 		} else if(operatorJoystick.getRawButton(14)) {
 			shooter.setWedgeSpeed(0.8);
 		} else {
 			shooter.setWedgeSpeed(0);
 		}
+		
+		/*if(operatorJoystick.getRawButton(13)) {
+			shooter.setWedgeSpeed(-0.8);
+		} else if(!RobotMap.shooter.wedgeSensor.get()) {
+			shooter.setWedgeSpeed(0.4);
+		} else {
+			shooter.setWedgeSpeed(0);
+		}*/
  		
 		//shooter.setAngleAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 1) * 30000);
 		//shooter.setAngleAbsolute(operatorJoystick.getRawAxis(1) * 500 + shooter.getAngleAbsolute());
