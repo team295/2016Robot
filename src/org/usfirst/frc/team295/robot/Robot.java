@@ -110,6 +110,9 @@ public class Robot extends IterativeRobot {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
     	
+    	//System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
+    	
+    	//System.out.println(RobotMap.us.read());
 //    	System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
     	
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
