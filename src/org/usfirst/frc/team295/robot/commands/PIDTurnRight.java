@@ -66,7 +66,7 @@ public class PIDTurnRight extends Command{
 		RobotMap.autonomous.setSetpoint(dpointAngle);
 		
 		
-		System.out.println("Left " +" Time: " + (Robot.getTimerValue()-startTimeForTimer) +  
+		System.out.println("Right " +" Time: " + (Robot.getTimerValue()-startTimeForTimer) +  
 				 " Done ? : " + done + " Error : " 
 				+ RobotMap.autonomous.getError() + " " + "Speed : "
 				+ RobotMap.autonomous.getPIDController().get()

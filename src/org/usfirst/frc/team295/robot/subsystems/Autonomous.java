@@ -16,7 +16,7 @@ public class Autonomous extends PIDSubsystem{
 	public double startHeading;
 	private double error;
 	public Autonomous(){
-		super("Drivetrain",.025, .0015, .035);
+		super("Autonomous",.025, .0015, .035);
 //		super("Drivetrain" , .02,0,0);
 		setAbsoluteTolerance(3);
 		getPIDController().setInputRange(0,360);

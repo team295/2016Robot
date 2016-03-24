@@ -1,14 +1,12 @@
 package org.usfirst.frc.team295.robot.commands;
 
 
-import org.usfirst.frc.team295.robot.Robot;
 import org.usfirst.frc.team295.robot.RobotMap;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoDrive extends Command{
 	double dTime;
@@ -35,6 +33,7 @@ public class AutoDrive extends Command{
 		ahrs = RobotMap.ahrs;
 		dFront = ahrs.getYaw();
 		System.out.println("Drive Started");
+		System.out.println("Angle Initial : " + ahrs.getAngle());
 	}
 
 	@Override
