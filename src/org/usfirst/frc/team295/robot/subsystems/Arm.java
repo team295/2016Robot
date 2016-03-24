@@ -86,6 +86,9 @@ public class Arm extends Subsystem {
 		} catch(Exception e) {
 			
 		}
+		
+		setElbowModePosition();
+		setShoulderModePosition();
 	}
 	
 	public void setElbowModePosition() {

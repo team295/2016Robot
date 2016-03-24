@@ -26,7 +26,6 @@ public class Robot extends IterativeRobot {
 		logger = FlightRecorder.getInstance();
 	}
 	
-	
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
