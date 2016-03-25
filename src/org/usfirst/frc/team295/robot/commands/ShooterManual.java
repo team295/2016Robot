@@ -46,40 +46,44 @@ public class ShooterManual extends Command {
 			shooter.setWedgeSpeed(0);
 		}*/
 		
-		if(operatorJoystick.getRawButton(9)) {
-			shooter.setSpeed(1, 1);
-		} else if(operatorJoystick.getRawButton(12)) {
-			shooter.setSpeed(-1, -1);
+		if(operatorJoystick.getRawButton(10)) {
+			shooter.setSpeed(-1, 1);
+		} else if(operatorJoystick.getRawButton(13)) {
+			shooter.setSpeed(1, -1);
 		} else {
 			shooter.setSpeed(0, 0);
 		}
 		
 		//shooter.setSpeed(1, 1);
 		
-		if(operatorJoystick.getRawButton(10)) {
+		if(operatorJoystick.getRawButton(11)) {
 			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 			shooter.angleMotor.configPeakOutputVoltage(12, -12);
 			shooter.angleMotor.setProfile(1);
+			shooter.shooterAngle = shooter.getAngleAbsolute();
 			shooter.setAngleAbsolute(10000);
-		} else if(operatorJoystick.getRawButton(11)) {
+		} else if(operatorJoystick.getRawButton(12)) {
 			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 			shooter.angleMotor.configPeakOutputVoltage(12, -12);
 			shooter.angleMotor.setProfile(1);
+			shooter.shooterAngle = shooter.getAngleAbsolute();
 			shooter.setAngleAbsolute(-20000);
 		} else {
 			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-			shooter.angleMotor.configPeakOutputVoltage(5.8, -2.2);
+			shooter.angleMotor.configPeakOutputVoltage(12.0, -12.0);
 			shooter.angleMotor.setProfile(0);
-			shooter.setAngleRelative(0);
+			shooter.setAngleAbsolute(shooter.shooterAngle / 1.4);
 		}
 		
-		if(!RobotMap.shooter.wedgeSensor.get()) {
-			shooter.setWedgeSpeed(-0.4);
-		} else if(operatorJoystick.getRawButton(14)) {
-			shooter.setWedgeSpeed(0.8);
+		if(operatorJoystick.getRawButton(9)) {
+			shooter.setWedgeSpeed(-1);
+		} else if(!RobotMap.shooter.wedgeSensor.get()) {
+			shooter.setWedgeSpeed(0.3);
 		} else {
 			shooter.setWedgeSpeed(0);
 		}
+		
+		System.out.println(RobotMap.shooter.wedgeSensor.get());
 		
 		/*if(operatorJoystick.getRawButton(13)) {
 			shooter.setWedgeSpeed(-0.8);

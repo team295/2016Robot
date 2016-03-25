@@ -4,12 +4,12 @@ import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SetShooterAngleRelative extends Command {
 
 	private Shooter shooter;
-	
 	private double angle;
 	
 	public SetShooterAngleRelative(double angle) {

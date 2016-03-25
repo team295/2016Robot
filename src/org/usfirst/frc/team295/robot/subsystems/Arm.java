@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 	
-	private static final short SHOULDER_PORT = 10;
-	private static final short ELBOW_PORT = 11;
+	private static final short SHOULDER_PORT = 11;
+	private static final short ELBOW_PORT = 10;
 
 	public static final double P_ONE  = 60000 / 1.4;
 	public static final double P_TWO = -30000 / 1.4;
@@ -17,6 +17,14 @@ public class Arm extends Subsystem {
 	
 	public CANTalon shoulder;
 	private CANTalon elbow;
+	
+	public double angleS;
+	public double previousAngleS;
+	public double currentAngleS;
+	
+	public double angleE;
+	public double previousAngleE;
+	public double currentAngleE;
 
 	@Override
 	public void initDefaultCommand() {
@@ -24,6 +32,14 @@ public class Arm extends Subsystem {
 	}
 	
 	public Arm() {
+		angleS = 0;
+		previousAngleS = 0;
+		currentAngleS = 0;
+		
+		angleE = 0;
+		previousAngleE = 0;
+		currentAngleE = 0;
+		
 		shoulder = new CANTalon(SHOULDER_PORT);
 		shoulder.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		shoulder.changeControlMode(CANTalon.TalonControlMode.Speed);
@@ -87,15 +103,18 @@ public class Arm extends Subsystem {
 			
 		}
 		
-		setElbowModePosition();
-		setShoulderModePosition();
+		//setElbowModePosition();
+		//setShoulderModePosition();
+		
+		elbow.reverseOutput(false);
+		shoulder.reverseOutput(false);
 	}
 	
 	public void setElbowModePosition() {
 		elbow.changeControlMode(CANTalon.TalonControlMode.Position);
-		elbow.configPeakOutputVoltage(3, -3);
+		elbow.configPeakOutputVoltage(4, -4);
 		elbow.setProfile(0);
-		elbow.set(elbow.getPosition() / 1.4);
+		//elbow.set(elbow.getPosition() / 1.4);
 	}
 	
 	public double getShoulderError() {
@@ -110,7 +129,6 @@ public class Arm extends Subsystem {
 	
 	public void setShoulderModePosition() {
 		shoulder.changeControlMode(CANTalon.TalonControlMode.Position);
-		shoulder.configPeakOutputVoltage(6, -6);
 		shoulder.setProfile(0);
 		//shoulder.set(elbow.getPosition() / 1.4);
 	}

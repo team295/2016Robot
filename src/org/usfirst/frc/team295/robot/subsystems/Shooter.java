@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
 
-	public static final int LEFT_SHOOTER_PORT = 15;
+	public static final int LEFT_SHOOTER_PORT = 17;
 	public static final int RIGHT_SHOOTER_PORT = 22; //17
-	public static final int ANGLE_MOTOR_PORT = 17; //22
+	public static final int ANGLE_MOTOR_PORT = 15; //22
 	public static final int WEDGE_MOTOR_PORT = 6;
 
 	public static final int PICKUP = 90000; //105000
@@ -28,6 +28,8 @@ public class Shooter extends Subsystem {
 	private CANTalon rightShooter;
 	public CANTalon angleMotor;
 	private VictorSP wedgeMotor;
+	
+	public double shooterAngle = 0;
 	
 	public DigitalInput wedgeSensor;
 	
@@ -71,7 +73,7 @@ public class Shooter extends Subsystem {
 		angleMotor.enableForwardSoftLimit(false);
 		angleMotor.enableReverseSoftLimit(false);
 		
-		angleMotor.reverseOutput(true);
+		angleMotor.reverseOutput(false);
 		
 		angleMotor.setEncPosition(0);
 		angleMotor.enable();
@@ -123,7 +125,7 @@ public class Shooter extends Subsystem {
 		} else {*/
 
 		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));
-		angleMotor.set(angleMotor.getPosition() / 1.4);
+		angleMotor.set(angleMotor.getPosition() / 1.4 + revolutions);
 		//}
 		//System.out.println(getAngleRelative());
 		//System.out.println(angleMotor.getPosition() + " " + (angleMotor.getPosition() + revolutions));

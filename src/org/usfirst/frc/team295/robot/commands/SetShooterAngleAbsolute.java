@@ -34,6 +34,7 @@ public class SetShooterAngleAbsolute extends Command {
 	@Override
 	protected void execute() {
 		shooter.setAngleAbsolute(angle);
+		shooter.shooterAngle = shooter.getAngleAbsolute();
 	}
 
 	@Override

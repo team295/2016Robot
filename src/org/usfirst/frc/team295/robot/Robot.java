@@ -1,9 +1,8 @@
 package org.usfirst.frc.team295.robot;
 
-import org.usfirst.frc.team295.robot.commands.AutoDrive;
-import org.usfirst.frc.team295.robot.commands.AutonomousSequence;
-import org.usfirst.frc.team295.robot.commands.PIDTurnRight;
+import org.usfirst.frc.team295.robot.commands.AutonomousOver;
 import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
+import org.usfirst.frc.team295.robot.utilities.Camera;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
 import org.usfirst.frc.team295.robot.utilities.Server;
 
@@ -12,7 +11,6 @@ import com.ni.vision.NIVision.Image;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,15 +23,16 @@ public class Robot extends IterativeRobot {
 	private static Timer sessionTimer = null;
 	private static long sessionIteration = 0;
 	
-	boolean cameraDirection;
+	boolean cameraDirection = true; //true = front false = back
 	USBCamera cameraFront;
 	USBCamera cameraBack;
 	Image frame;
 	CameraServer server;
+	Camera camera;
 	
 	Thread ServerThread; 
 	UltrasonicSensors us = new UltrasonicSensors();
-	CommandGroup autosequence;
+	CommandGroup autonomousOver;
 	Command driveStraight;
 	Command turnRight;
 	
@@ -44,16 +43,17 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
-		autosequence =  new AutonomousSequence();
-		driveStraight = new AutoDrive(4, .5, 1);
-		turnRight = new PIDTurnRight(90);
-		RobotMap.drivetrain.isTeleop = false;
-		
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		server = CameraServer.getInstance();
-        server.setQuality(20);
-        cameraBack = RobotMap.camera.cameraBack;
+		autonomousOver =  new AutonomousOver();
+		//driveStraight = new AutoDrive(4, .5, 1);
+		//turnRight = new PIDTurnRight(90);
+		//RobotMap.drivetrain.isTeleop = false;
+		camera = RobotMap.camera;
+//		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+//		server = CameraServer.getInstance();
+//        server.setQuality(30);
+//        cameraBack = RobotMap.camera.cameraBack;
 //        cameraFront = RobotMap.camera.cameraFront;
+//        cameraFront.startCapture();
 	}
 	
 	public void enabledInit() {
@@ -78,8 +78,21 @@ public class Robot extends IterativeRobot {
 		log();
 //		System.out.println(RobotMap.shooter.getAngleAbsolute());
 		System.out.println(RobotMap.shooter.getAngleMotor().get());
-		/* TODO: ADD CORRECT JOYSTICK BUTTON FOR OPERATOR */
-//		if(RobotMap.oi.getDriverJoystick().getRawButton(5)){ 
+		//TODO: ADD BUTTON 5 & 6
+		
+//		cameraBack.startCapture();
+//    	cameraBack.getImage(frame);
+//    	server.setImage(frame);
+//    	
+    	
+	}
+	
+    @Override
+    public void teleopPeriodic() {
+    	enabledPeriodic();
+    	Scheduler.getInstance().run();
+    	camera.loop();
+//    	if(RobotMap.oi.getDriverJoystick().getRawButton(5)){ 
 //    		cameraDirection = !cameraDirection;
 //    		if(cameraDirection){
 //    			cameraBack.stopCapture();
@@ -92,23 +105,11 @@ public class Robot extends IterativeRobot {
 //    	}
 //    	if(cameraDirection){
 //    		cameraFront.getImage(frame);
-//    		System.out.println(frame.toString());
 //    	}
 //    	else{
 //    		cameraBack.getImage(frame);
 //    	}
-//		cameraBack.startCapture();
-//    	cameraBack.getImage(frame);
 //    	server.setImage(frame);
-//    	
-//    	CameraServer.getInstance().setImage(frame);
-	}
-	
-    @Override
-    public void teleopPeriodic() {
-    	enabledPeriodic();
-    	Scheduler.getInstance().run();
-    	
     	//System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
     	
     	//System.out.println(RobotMap.us.read());
@@ -119,15 +120,16 @@ public class Robot extends IterativeRobot {
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+    	
     	logger.log();
 	}
-
+    
 	@Override
 	public void autonomousInit() {
 		RobotMap.drivetrain.isTeleop = false;
 		enabledInit();
 //		if (autonomousCommand != null) autonomousCommand.start();
-		if(autosequence != null) autosequence.start();
+		if(autonomousOver!= null) autonomousOver.start();
 //		if(driveStraight !=null) driveStraight.start();
 //		if(turnRight !=null) turnRight.start();
 	}
@@ -144,8 +146,8 @@ public class Robot extends IterativeRobot {
 		enabledInit();
 		//Move to Auto Init
 		
-		 ServerThread = new Thread(new Server(RobotMap.serversocket));
-		 ServerThread.start();
+//		 ServerThread = new Thread(new Server(RobotMap.serversocket));
+//		 ServerThread.start();
 //		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
 	}
 	@Override

@@ -3,7 +3,7 @@ package org.usfirst.frc.team295.robot.subsystems;
 
 import org.usfirst.frc.team295.robot.commands.AutoDrive;
 import org.usfirst.frc.team295.robot.commands.AutoTurn;
-import org.usfirst.frc.team295.robot.commands.AutonomousSequence;
+import org.usfirst.frc.team295.robot.commands.AutonomousOver;
 import org.usfirst.frc.team295.robot.commands.CrossDrawbridge;
 import org.usfirst.frc.team295.robot.commands.Drive;
 import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
@@ -129,28 +129,27 @@ public class OI {
 		
 		
 		driverButtonA = new JoystickButton(driver, 1);
-//		driverButtonA.whenPressed(new DriveShiftArm());
-		driverButtonA.whenPressed(new AutoDrive(1, .5,1));
+		driverButtonA.whenPressed(new DriveShiftArm());
+		//driverButtonA.whenPressed(new AutoDrive(1, .5,1));
 		driverButtonB = new JoystickButton(driver, 2);
-//		driverButtonB.whenPressed(new SetShooterAngleAbsolute(Shooter.CASTLE_SHOOT)); //TODO: DriveShiftArm
-		driverButtonB.whenPressed(new PIDTurnLeft(90));
+		//driverButtonB.whenPressed(new PIDTurnLeft(90));
 		driverButtonY = new JoystickButton(driver, 4);
 //		driverButtonY.whenPressed(new DriveShiftArm());
-		driverButtonY.whenPressed(new PIDTurnRight(90));
+		//driverButtonY.whenPressed(new PIDTurnRight(90));
 		
-		operatorButton3 = new JoystickButton(operator, 3);
+		operatorButton3 = new JoystickButton(operator, 4);
 		operatorButton3.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
 		
-		operatorButton4 = new JoystickButton(operator, 4);
+		operatorButton4 = new JoystickButton(operator, 8);
 		operatorButton4.whenPressed(new SetShooterAngleAbsolute(60000));
 		
-		operatorButton5 = new JoystickButton(operator, 5);
+		operatorButton5 = new JoystickButton(operator, 7);
 		operatorButton5.whenPressed(new SetShooterAngleAbsolute(70000));
 		
 		operatorButton6 = new JoystickButton(operator, 6);
 		operatorButton6.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
 		
-		operatorButton7 = new JoystickButton(operator, 7);
+		operatorButton7 = new JoystickButton(operator, 5);
 		operatorButton7.whenPressed(new SetShooterAngleAbsolute(65000));
 	}
 	
