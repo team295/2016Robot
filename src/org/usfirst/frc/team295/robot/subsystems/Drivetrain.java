@@ -25,7 +25,7 @@ public class Drivetrain extends Subsystem {
 	private SpeedController[] motors;
 	public RobotDrive robotDrive;
 	public boolean isTeleop = false;
-	private int direction = 1; //1 = arm front; -1 = shooter front
+	private int direction = -1; //1 = arm front; -1 = shooter front
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -81,7 +81,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void arcadeDrive(double move, double rotation) {
-		robotDrive.arcadeDrive(direction * UtilityFunctions.deadband(move), UtilityFunctions.deadband(-rotation));
+		robotDrive.arcadeDrive(direction * Math.pow(UtilityFunctions.deadband(move), 1), Math.pow(UtilityFunctions.deadband(-rotation), 1));
 	}
 	public void setDirection(int direction){
 		this.direction = direction;

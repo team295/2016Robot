@@ -10,7 +10,9 @@ import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,7 +31,7 @@ public class Robot extends IterativeRobot {
 	Image frame;
 	CameraServer server;
 	Camera camera;
-	
+	I2C i2c;
 	Thread ServerThread; 
 	UltrasonicSensors us = new UltrasonicSensors();
 	CommandGroup autonomousOver;
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot {
 	
 	public void robotInit() {
 		sessionTimer = new Timer();
+		i2c = new I2C(I2C.Port.kOnboard,224);
 		RobotMap.init();
 		autonomousOver =  new AutonomousOver();
 		//driveStraight = new AutoDrive(4, .5, 1);
@@ -77,7 +80,7 @@ public class Robot extends IterativeRobot {
 		sessionIteration++;
 		log();
 //		System.out.println(RobotMap.shooter.getAngleAbsolute());
-		System.out.println(RobotMap.shooter.getAngleMotor().get());
+//		System.out.println(RobotMap.shooter.getAngleMotor().get());
 		//TODO: ADD BUTTON 5 & 6
 		
 //		cameraBack.startCapture();
@@ -92,6 +95,7 @@ public class Robot extends IterativeRobot {
     	enabledPeriodic();
     	Scheduler.getInstance().run();
     	camera.loop();
+//    	System.out.println(RobotMap.shooter.getAngleAbsolute());
 //    	if(RobotMap.oi.getDriverJoystick().getRawButton(5)){ 
 //    		cameraDirection = !cameraDirection;
 //    		if(cameraDirection){
@@ -120,6 +124,8 @@ public class Robot extends IterativeRobot {
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+    	
+//    	RobotMap.shooter.setWedgeSpeed(RobotMap.oi.getOperatorJoystick().getRawAxis(1));
     	
     	logger.log();
 	}
@@ -156,7 +162,8 @@ public class Robot extends IterativeRobot {
 	}
 	@Override
 	public void testPeriodic() {
-		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
+//		System.out.println(i2c.);
+//		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
 	}
 	
 	/**

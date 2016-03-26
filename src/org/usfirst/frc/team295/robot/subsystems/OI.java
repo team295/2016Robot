@@ -141,7 +141,7 @@ public class OI {
 		operatorButton3.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
 		
 		operatorButton4 = new JoystickButton(operator, 8);
-		operatorButton4.whenPressed(new SetShooterAngleAbsolute(60000));
+		operatorButton4.whenPressed(new SetShooterAngleAbsolute(54000));
 		
 		operatorButton5 = new JoystickButton(operator, 7);
 		operatorButton5.whenPressed(new SetShooterAngleAbsolute(70000));

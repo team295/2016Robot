@@ -77,7 +77,7 @@ public class ShooterManual extends Command {
 		
 		if(operatorJoystick.getRawButton(9)) {
 			shooter.setWedgeSpeed(-1);
-		} else if(!RobotMap.shooter.wedgeSensor.get()) {
+		} else if(RobotMap.shooter.wedgeSensor.get()) {
 			shooter.setWedgeSpeed(0.3);
 		} else {
 			shooter.setWedgeSpeed(0);
