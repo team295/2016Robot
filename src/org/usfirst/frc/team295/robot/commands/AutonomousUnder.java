@@ -13,8 +13,10 @@ public class AutonomousUnder extends CommandGroup {
 		
 		RobotMap.ahrs.reset();
 		dZeroAngle = RobotMap.ahrs.getAngle();
-		addSequential(new SetShooterAngleAbsolute(50000));
-		addSequential(new AutoDrive(3, .5, 1));
+		addSequential(new SetShooterAngleAbsolute(75000));
+		
+		addSequential(new LowerShoulder(20000));
+//		addSequential(new AutoDrive(3, .5, 1));
 //		addSequential(new ZeroDrive());
 //		dZeroTurn = dZeroAngle - RobotMap.ahrs.getAngle();
 //		if(dZeroTurn > 0){

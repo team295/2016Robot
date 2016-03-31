@@ -17,7 +17,7 @@ public class DriveShiftShooter extends Command{
 
 	@Override
 	protected void execute() {
-		RobotMap.drivetrain.setDirection(-1);
+		RobotMap.drivetrain.setDirection(1);
 		System.out.println("DriveBack : " + RobotMap.drivetrain.getDirection());
 	}
 

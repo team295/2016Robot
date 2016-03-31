@@ -128,12 +128,13 @@ public class OI {
 		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));*/
 		
 		
-		driverButtonA = new JoystickButton(driver, 1);
+		driverButtonA = new JoystickButton(driver, 3);
 		driverButtonA.whenPressed(new DriveShiftArm());
 		//driverButtonA.whenPressed(new AutoDrive(1, .5,1));
 		driverButtonB = new JoystickButton(driver, 2);
+		driverButtonB.whenPressed(new DriveShiftShooter());
 		//driverButtonB.whenPressed(new PIDTurnLeft(90));
-		driverButtonY = new JoystickButton(driver, 4);
+//		driverButtonY = new JoystickButton(driver, 4);
 //		driverButtonY.whenPressed(new DriveShiftArm());
 		//driverButtonY.whenPressed(new PIDTurnRight(90));
 		

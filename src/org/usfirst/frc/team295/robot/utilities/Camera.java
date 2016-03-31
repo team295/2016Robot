@@ -34,25 +34,25 @@ public class Camera {
 //		cameraBack.setFPS(20);
 //		cameraBack.updateSettings();frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		sessionfront = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+//		sessionfront = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		sessionback = NIVision.IMAQdxOpenCamera("cam2", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		currSession = sessionfront;
+		currSession = sessionback;
 		NIVision.IMAQdxConfigureGrab(currSession); 
 	}
 	
 	public void loop() {
-		if(RobotMap.oi.getDriverJoystick().getRawButton(5)){
-			direction = !direction;
-		    if(direction){
-		        NIVision.IMAQdxStopAcquisition(currSession);
-		        currSession = sessionfront;
-		        NIVision.IMAQdxConfigureGrab(currSession);
-		    }else{
-		        NIVision.IMAQdxStopAcquisition(currSession);
-		        currSession = sessionback;
-		        NIVision.IMAQdxConfigureGrab(currSession);
-		    }
-		}
+//		if(RobotMap.oi.getDriverJoystick().getRawButton(1)){
+//			direction = !direction;
+//		    if(direction){
+//		        NIVision.IMAQdxStopAcquisition(currSession);
+//		        currSession = sessionfront;
+//		        NIVision.IMAQdxConfigureGrab(currSession);
+//		    }else{
+//		        NIVision.IMAQdxStopAcquisition(currSession);
+//		        currSession = sessionback;
+//		        NIVision.IMAQdxConfigureGrab(currSession);
+//		    }
+//		}
 		
 		NIVision.IMAQdxGrab(currSession, frame, 1);
 		CameraServer.getInstance().setImage(frame);

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team295.robot;
 
 import org.usfirst.frc.team295.robot.commands.AutonomousOver;
+import org.usfirst.frc.team295.robot.commands.AutonomousUnder;
 import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
 import org.usfirst.frc.team295.robot.utilities.Camera;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
@@ -87,7 +88,7 @@ public class Robot extends IterativeRobot {
 //    	cameraBack.getImage(frame);
 //    	server.setImage(frame);
 //    	
-    	
+    	System.out.println("Shooter Angle : " + RobotMap.shooter.getAngleAbsolute());
 	}
 	
     @Override

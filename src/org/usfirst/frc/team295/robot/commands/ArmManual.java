@@ -30,9 +30,9 @@ public class ArmManual extends Command {
 		//arm.setShoulderAbsolute(-Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5)), 1) * 30000);
 		//arm.setElbowAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 3) * 40000);
 		
-		if(operatorJoystick.getRawButton(2)) {
+		if(operatorJoystick.getRawButton(3)) {
 			arm.setShoulderAbsolute(-15000);
-		} else if(operatorJoystick.getRawButton(3)) {
+		} else if(operatorJoystick.getRawButton(2)) {
 			arm.setShoulderAbsolute(15000);
 		} else {
 			arm.setShoulderAbsolute(0);

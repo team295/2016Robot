@@ -25,7 +25,7 @@ public class Drivetrain extends Subsystem {
 	private SpeedController[] motors;
 	public RobotDrive robotDrive;
 	public boolean isTeleop = false;
-	private int direction = -1; //1 = arm front; -1 = shooter front
+	private int direction = -1; //1 = shooter front; -1 = arm front
 	
 	@Override
 	protected void initDefaultCommand() {
