@@ -11,13 +11,13 @@ public class LowerShoulder extends Command {
 
 	private Arm arm;
 
-	private double angle;
+	//private double angle;
 	private double startTime;
 	
 	public LowerShoulder(double angle) {
 		arm = RobotMap.arm;
 		requires(arm);
-		this.angle = angle;		
+		//this.angle = angle;		
 		
 	}
 	
@@ -26,13 +26,12 @@ public class LowerShoulder extends Command {
 		startTime = Timer.getFPGATimestamp();
 		
 		arm.shoulder.configPeakOutputVoltage(5, -2.5); //2.5, -4.4
-		arm.shoulder.changeControlMode(CANTalon.TalonControlMode.Position);
-		arm.shoulder.setProfile(0);
+		arm.shoulder.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 	}
 
 	@Override
 	protected void execute() {
-		arm.setShoulderAbsolute(angle);
+		arm.setShoulderAbsolute(0.4);
 	}
 
 	@Override

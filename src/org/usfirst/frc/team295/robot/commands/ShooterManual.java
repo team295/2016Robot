@@ -47,9 +47,9 @@ public class ShooterManual extends Command {
 		}*/
 		
 		if(operatorJoystick.getRawButton(10)) {
-			shooter.setSpeed(-1, 1);
+			shooter.setSpeed(-1, -1);
 		} else if(operatorJoystick.getRawButton(13)) {
-			shooter.setSpeed(1, -1);
+			shooter.setSpeed(1, 1);
 		} else {
 			shooter.setSpeed(0, 0);
 		}
@@ -61,13 +61,21 @@ public class ShooterManual extends Command {
 			shooter.angleMotor.configPeakOutputVoltage(12, -12);
 			shooter.angleMotor.setProfile(1);
 			shooter.shooterAngle = shooter.getAngleAbsolute();
-			shooter.setAngleAbsolute(10000);
+			if(operatorJoystick.getRawButton(3)) {
+				shooter.setAngleAbsolute(4000);
+			} else {
+				shooter.setAngleAbsolute(10000);
+			}
 		} else if(operatorJoystick.getRawButton(12)) {
 			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Speed);
 			shooter.angleMotor.configPeakOutputVoltage(12, -12);
 			shooter.angleMotor.setProfile(1);
 			shooter.shooterAngle = shooter.getAngleAbsolute();
-			shooter.setAngleAbsolute(-20000);
+			if(operatorJoystick.getRawButton(3)) {
+				shooter.setAngleAbsolute(-12000);
+			} else {
+				shooter.setAngleAbsolute(-20000);
+			}
 		} else {
 			shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
 			shooter.angleMotor.configPeakOutputVoltage(12.0, -12.0);
@@ -83,7 +91,7 @@ public class ShooterManual extends Command {
 			shooter.setWedgeSpeed(0);
 		}
 		
-		System.out.println(RobotMap.shooter.wedgeSensor.get());
+//		System.out.println(RobotMap.shooter.wedgeSensor.get());
 		
 		/*if(operatorJoystick.getRawButton(13)) {
 			shooter.setWedgeSpeed(-0.8);

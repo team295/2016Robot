@@ -26,7 +26,7 @@ public class SetShooterAngleAbsolute extends Command {
 	protected void initialize() {
 		startTime = Timer.getFPGATimestamp();
 		
-		shooter.angleMotor.configPeakOutputVoltage(4, -2.5); //2.5, -4.4
+		shooter.angleMotor.configPeakOutputVoltage(10, -12); //2.5, -4.4
 		shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
 		shooter.angleMotor.setProfile(0);
 	}
@@ -44,7 +44,7 @@ public class SetShooterAngleAbsolute extends Command {
 		//return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - angle < UtilityFunctions.encoderFinish);
 		//System.out.println("Not done");
 		//return Math.abs(RobotMap.shooter.getAngleAbsolute() - (angle * 1.4)) < UtilityFunctions.encoderFinish;
-		return Timer.getFPGATimestamp() - 3 >= startTime;
+		return Timer.getFPGATimestamp() - 1.8 >= startTime;
 	}
 
 	@Override

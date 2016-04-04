@@ -4,12 +4,9 @@ import org.usfirst.frc.team295.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveShiftShooter extends Command{
-
-	public DriveShiftShooter() {
-
+public class FlashlightToggl extends Command{
+	public FlashlightToggl(){
 	}
-	
 	@Override
 	protected void initialize() {
 		
@@ -17,8 +14,8 @@ public class DriveShiftShooter extends Command{
 
 	@Override
 	protected void execute() {
-		RobotMap.drivetrain.setDirection(1);
-//		System.out.println("DriveBack : " + RobotMap.drivetrain.getDirection());
+//		RobotMap.shooter.
+		//System.out.println("DriveForward : " + RobotMap.drivetrain.getDirection());
 	}
 
 	@Override

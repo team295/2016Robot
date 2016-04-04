@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 	
 	public void robotInit() {
 		sessionTimer = new Timer();
-		i2c = new I2C(I2C.Port.kOnboard,224);
+//		i2c = new I2C(I2C.Port.kOnboard,224);
 		RobotMap.init();
 		autonomousOver =  new AutonomousOver();
 		//driveStraight = new AutoDrive(4, .5, 1);
@@ -81,14 +81,14 @@ public class Robot extends IterativeRobot {
 		sessionIteration++;
 		log();
 //		System.out.println(RobotMap.shooter.getAngleAbsolute());
-//		System.out.println(RobotMap.shooter.getAngleMotor().get());
+//		System.out.println(RobotMap.shooter.getAngleMotor().ge04iot());
 		//TODO: ADD BUTTON 5 & 6
 		
 //		cameraBack.startCapture();
 //    	cameraBack.getImage(frame);
 //    	server.setImage(frame);
 //    	
-    	System.out.println("Shooter Angle : " + RobotMap.shooter.getAngleAbsolute());
+//    	System.out.println("Shooter Angle : " + RobotMap.shooter.getAngleAbsolute());
 	}
 	
     @Override

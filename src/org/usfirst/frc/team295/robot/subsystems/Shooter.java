@@ -5,6 +5,7 @@ import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -28,7 +29,8 @@ public class Shooter extends Subsystem {
 	private CANTalon rightShooter;
 	public CANTalon angleMotor;
 	private VictorSP wedgeMotor;
-	
+	private Relay flashlight;
+	                    
 	public double shooterAngle = 0;
 	
 	public DigitalInput wedgeSensor;
@@ -38,10 +40,14 @@ public class Shooter extends Subsystem {
 	public Shooter() {
 		wedgeSensor = new DigitalInput(4);
 		
+		//flashlight = new Relay(1);
+		//flashlight.set(Relay.Value.kOn);
+		
 		leftShooter = new CANTalon(LEFT_SHOOTER_PORT);
 		leftShooter.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		leftShooter.enableBrakeMode(true);
 		leftShooter.enable();
+		leftShooter.reverseOutput(false);
 
 		rightShooter = new CANTalon(RIGHT_SHOOTER_PORT);
 		rightShooter.changeControlMode(CANTalon.TalonControlMode.PercentVbus);

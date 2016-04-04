@@ -11,8 +11,10 @@ import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
 import org.usfirst.frc.team295.robot.commands.PIDTurnLeft;
 import org.usfirst.frc.team295.robot.commands.PIDTurnRight;
 import org.usfirst.frc.team295.robot.commands.Reset;
+import org.usfirst.frc.team295.robot.commands.SetFast;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 import org.usfirst.frc.team295.robot.commands.SetShoulderPosition;
+import org.usfirst.frc.team295.robot.commands.SetSlow;
 import org.usfirst.frc.team295.robot.commands.ZeroDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -126,26 +128,29 @@ public class OI {
 		driverButtonLB.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
 		driverButtonRB = new JoystickButton(driver,6);
 		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));*/
+		driverButtonA = new JoystickButton(driver,1);
+		driverButtonA.whenPressed(new SetFast());
 		
-		
-		driverButtonA = new JoystickButton(driver, 3);
-		driverButtonA.whenPressed(new DriveShiftArm());
+		driverButtonB = new JoystickButton(driver, 3);
+		driverButtonB.whenPressed(new DriveShiftArm());
 		//driverButtonA.whenPressed(new AutoDrive(1, .5,1));
-		driverButtonB = new JoystickButton(driver, 2);
-		driverButtonB.whenPressed(new DriveShiftShooter());
+		driverButtonX = new JoystickButton(driver, 2);
+		driverButtonX.whenPressed(new DriveShiftShooter());
+		
 		//driverButtonB.whenPressed(new PIDTurnLeft(90));
-//		driverButtonY = new JoystickButton(driver, 4);
-//		driverButtonY.whenPressed(new DriveShiftArm());
+		driverButtonY = new JoystickButton(driver, 4);
+		driverButtonY.whenPressed(new SetSlow());
 		//driverButtonY.whenPressed(new PIDTurnRight(90));
 		
 		operatorButton3 = new JoystickButton(operator, 4);
-		operatorButton3.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
+		operatorButton3.whenPressed(new SetShooterAngleAbsolute(166226/1.4));
 		
 		operatorButton4 = new JoystickButton(operator, 8);
-		operatorButton4.whenPressed(new SetShooterAngleAbsolute(54000));
+//		operatorButton4.whenPressed(new SetShooterAngleAbsolute(54000));
+		operatorButton4.whenPressed(new SetShooterAngleAbsolute(73000/1.4));
 		
 		operatorButton5 = new JoystickButton(operator, 7);
-		operatorButton5.whenPressed(new SetShooterAngleAbsolute(70000));
+		operatorButton5.whenPressed(new SetShooterAngleAbsolute(38000/1.4));
 		
 		operatorButton6 = new JoystickButton(operator, 6);
 		operatorButton6.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));

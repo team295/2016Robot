@@ -25,8 +25,8 @@ public class Drivetrain extends Subsystem {
 	private SpeedController[] motors;
 	public RobotDrive robotDrive;
 	public boolean isTeleop = false;
-	private int direction = -1; //1 = shooter front; -1 = arm front
-	
+	private int direction = 1; //1 = shooter front; -1 = arm front
+	private boolean fast = true; 
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new DriveTank());
@@ -81,7 +81,11 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void arcadeDrive(double move, double rotation) {
+		if(fast)
 		robotDrive.arcadeDrive(direction * Math.pow(UtilityFunctions.deadband(move), 1), Math.pow(UtilityFunctions.deadband(-rotation), 1));
+		else{
+			robotDrive.arcadeDrive(direction * Math.pow(UtilityFunctions.deadband(move), 1)* .8, Math.pow(UtilityFunctions.deadband(-rotation), 1)*.6);
+		}
 	}
 	public void setDirection(int direction){
 		this.direction = direction;
@@ -90,6 +94,14 @@ public class Drivetrain extends Subsystem {
 		return this.direction;
 	}
 	
+	public boolean isFast() {
+		return fast;
+	}
+
+	public void setFast(boolean fast) {
+		this.fast = fast;
+	}
+
 	//Used as constants for motor & speed controller positions, do not change
 	private static final short BACK_LEFT = 0;
 	private static final short BACK_RIGHT = 1;
