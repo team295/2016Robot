@@ -1,17 +1,17 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 public class UltrasonicSensors {
 
-	private DigitalInput sensor;
+	private AnalogInput sensor;
 	
 	public UltrasonicSensors() {
-		//sensor = new DigitalInput(0)
+		sensor = new AnalogInput(3);
 	}
 	
-	public boolean read() {
-		return true;//sensor.get();
+	public int read() {
+		return sensor.getValue();
 	}
 	
 }
