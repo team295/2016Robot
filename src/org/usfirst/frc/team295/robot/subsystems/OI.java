@@ -3,7 +3,7 @@ package org.usfirst.frc.team295.robot.subsystems;
 
 import org.usfirst.frc.team295.robot.commands.AutoDrive;
 import org.usfirst.frc.team295.robot.commands.AutoTurn;
-import org.usfirst.frc.team295.robot.commands.AutonomousSequence;
+import org.usfirst.frc.team295.robot.commands.AutonomousOver;
 import org.usfirst.frc.team295.robot.commands.CrossDrawbridge;
 import org.usfirst.frc.team295.robot.commands.Drive;
 import org.usfirst.frc.team295.robot.commands.DriveShiftArm;
@@ -11,8 +11,10 @@ import org.usfirst.frc.team295.robot.commands.DriveShiftShooter;
 import org.usfirst.frc.team295.robot.commands.PIDTurnLeft;
 import org.usfirst.frc.team295.robot.commands.PIDTurnRight;
 import org.usfirst.frc.team295.robot.commands.Reset;
+import org.usfirst.frc.team295.robot.commands.SetFast;
 import org.usfirst.frc.team295.robot.commands.SetShooterAngleAbsolute;
 import org.usfirst.frc.team295.robot.commands.SetShoulderPosition;
+import org.usfirst.frc.team295.robot.commands.SetSlow;
 import org.usfirst.frc.team295.robot.commands.ZeroDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -126,31 +128,34 @@ public class OI {
 		driverButtonLB.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
 		driverButtonRB = new JoystickButton(driver,6);
 		driverButtonRB.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));*/
+		driverButtonA = new JoystickButton(driver,1);
+		driverButtonA.whenPressed(new SetFast());
 		
+		driverButtonB = new JoystickButton(driver, 3);
+		driverButtonB.whenPressed(new DriveShiftArm());
+		//driverButtonA.whenPressed(new AutoDrive(1, .5,1));
+		driverButtonX = new JoystickButton(driver, 2);
+		driverButtonX.whenPressed(new DriveShiftShooter());
 		
-		driverButtonA = new JoystickButton(driver, 1);
-//		driverButtonA.whenPressed(new DriveShiftArm());
-		driverButtonA.whenPressed(new AutoDrive(1, .5,1));
-		driverButtonB = new JoystickButton(driver, 2);
-//		driverButtonB.whenPressed(new SetShooterAngleAbsolute(Shooter.CASTLE_SHOOT)); //TODO: DriveShiftArm
-		driverButtonB.whenPressed(new PIDTurnLeft(90));
+		//driverButtonB.whenPressed(new PIDTurnLeft(90));
 		driverButtonY = new JoystickButton(driver, 4);
-//		driverButtonY.whenPressed(new DriveShiftArm());
-		driverButtonY.whenPressed(new PIDTurnRight(90));
+		driverButtonY.whenPressed(new SetSlow());
+		//driverButtonY.whenPressed(new PIDTurnRight(90));
 		
-		operatorButton3 = new JoystickButton(operator, 3);
-		operatorButton3.whenPressed(new SetShooterAngleAbsolute(Shooter.STORE));
+		operatorButton3 = new JoystickButton(operator, 4);
+		operatorButton3.whenPressed(new SetShooterAngleAbsolute(166226/1.4));
 		
-		operatorButton4 = new JoystickButton(operator, 4);
-		operatorButton4.whenPressed(new SetShooterAngleAbsolute(60000));
+		operatorButton4 = new JoystickButton(operator, 8);
+//		operatorButton4.whenPressed(new SetShooterAngleAbsolute(54000));
+		operatorButton4.whenPressed(new SetShooterAngleAbsolute(73000/1.4));
 		
-		operatorButton5 = new JoystickButton(operator, 5);
-		operatorButton5.whenPressed(new SetShooterAngleAbsolute(70000));
+		operatorButton5 = new JoystickButton(operator, 7);
+		operatorButton5.whenPressed(new SetShooterAngleAbsolute(38000/1.4));
 		
 		operatorButton6 = new JoystickButton(operator, 6);
 		operatorButton6.whenPressed(new SetShooterAngleAbsolute(Shooter.LOW_SHOOT));
 		
-		operatorButton7 = new JoystickButton(operator, 7);
+		operatorButton7 = new JoystickButton(operator, 5);
 		operatorButton7.whenPressed(new SetShooterAngleAbsolute(65000));
 	}
 	

@@ -24,8 +24,15 @@ public class DriveTank extends Command {
 
 	@Override
 	protected void execute() {
-		if(RobotMap.drivetrain.isTeleop)
-		drivetrain.arcadeDrive(-Math.pow(driverJoystick.getRawAxis(1), 1), Math.pow(driverJoystick.getRawAxis(4), 1));
+		if(RobotMap.drivetrain.isTeleop) {
+			if(driverJoystick.getRawAxis(2) > 0) {
+				drivetrain.arcadeDrive(0, -Math.pow(driverJoystick.getRawAxis(2) * 0.7, 1));
+			} else if(driverJoystick.getRawAxis(3) > 0) {
+				drivetrain.arcadeDrive(0, Math.pow(driverJoystick.getRawAxis(3) * 0.7, 1));
+			} else {
+				drivetrain.arcadeDrive(-Math.pow(driverJoystick.getRawAxis(1), 1), Math.pow(driverJoystick.getRawAxis(4), 1));
+			}
+		}
 	}
 
 	@Override

@@ -1,22 +1,22 @@
 package org.usfirst.frc.team295.robot;
 
-import org.usfirst.frc.team295.robot.commands.AutoDrive;
-import org.usfirst.frc.team295.robot.commands.AutonomousSequence;
-import org.usfirst.frc.team295.robot.commands.PIDTurnRight;
+import org.usfirst.frc.team295.robot.commands.Auto5Low;
+import org.usfirst.frc.team295.robot.commands.AutonomousOver;
 import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
+import org.usfirst.frc.team295.robot.utilities.Camera;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
-import org.usfirst.frc.team295.robot.utilities.Server;
 
-import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Robot extends IterativeRobot {
@@ -25,18 +25,20 @@ public class Robot extends IterativeRobot {
 	private static Timer sessionTimer = null;
 	private static long sessionIteration = 0;
 	
-	boolean cameraDirection;
+	boolean cameraDirection = true; //true = front false = back
 	USBCamera cameraFront;
 	USBCamera cameraBack;
 	Image frame;
 	CameraServer server;
-	
+	Camera camera;
+	I2C i2c;
 	Thread ServerThread; 
 	UltrasonicSensors us = new UltrasonicSensors();
-	CommandGroup autosequence;
+	CommandGroup autonomousOver;
 	Command driveStraight;
 	Command turnRight;
-	
+	Command autonomousCommand;
+	SendableChooser chooser;	
 	static {
 		logger = FlightRecorder.getInstance();
 	}
@@ -44,16 +46,20 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		sessionTimer = new Timer();
 		RobotMap.init();
-		autosequence =  new AutonomousSequence();
-		driveStraight = new AutoDrive(4, .5, 1);
-		turnRight = new PIDTurnRight(90);
-		RobotMap.drivetrain.isTeleop = false;
 		
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		server = CameraServer.getInstance();
-        server.setQuality(20);
-        cameraBack = RobotMap.camera.cameraBack;
+		autonomousOver =  new AutonomousOver();
+		camera = RobotMap.camera;
+		
+		chooser = new SendableChooser();
+		chooser.addDefault("Drive Straight", new AutonomousOver());
+		chooser.addObject("5-Low", new Auto5Low());
+		SmartDashboard.putData("Auto Chooser",chooser);
+//		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+//		server = CameraServer.getInstance();
+//        server.setQuality(30);
+//        cameraBack = RobotMap.camera.cameraBack;
 //        cameraFront = RobotMap.camera.cameraFront;
+//        cameraFront.startCapture();
 	}
 	
 	public void enabledInit() {
@@ -76,10 +82,24 @@ public class Robot extends IterativeRobot {
 	public void enabledPeriodic() {
 		sessionIteration++;
 		log();
-//		System.out.println(RobotMap.shooter.getAngleAbsolute());
-		System.out.println(RobotMap.shooter.getAngleMotor().get());
-		/* TODO: ADD CORRECT JOYSTICK BUTTON FOR OPERATOR */
-//		if(RobotMap.oi.getDriverJoystick().getRawButton(5)){ 
+		System.out.println(RobotMap.shooter.getAngleAbsolute());
+//		System.out.println(RobotMap.shooter.getAngleMotor().ge04iot());
+		//TODO: ADD BUTTON 5 & 6
+		
+//		cameraBack.startCapture();
+//    	cameraBack.getImage(frame);
+//    	server.setImage(frame);
+//    	
+//    	System.out.println("Shooter Angle : " + RobotMap.shooter.getAngleAbsolute());
+	}
+	
+    @Override
+    public void teleopPeriodic() {
+    	enabledPeriodic();
+    	Scheduler.getInstance().run();
+    	camera.loop();
+//    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+//    	if(RobotMap.oi.getDriverJoystick().getRawButton(5)){ 
 //    		cameraDirection = !cameraDirection;
 //    		if(cameraDirection){
 //    			cameraBack.stopCapture();
@@ -92,23 +112,11 @@ public class Robot extends IterativeRobot {
 //    	}
 //    	if(cameraDirection){
 //    		cameraFront.getImage(frame);
-//    		System.out.println(frame.toString());
 //    	}
 //    	else{
 //    		cameraBack.getImage(frame);
 //    	}
-//		cameraBack.startCapture();
-//    	cameraBack.getImage(frame);
 //    	server.setImage(frame);
-//    	
-//    	CameraServer.getInstance().setImage(frame);
-	}
-	
-    @Override
-    public void teleopPeriodic() {
-    	enabledPeriodic();
-    	Scheduler.getInstance().run();
-    	
     	//System.out.println(RobotMap.arm.getShoulderPosition() + " " + RobotMap.arm.getElbowPosition());
     	
     	//System.out.println(RobotMap.us.read());
@@ -119,15 +127,23 @@ public class Robot extends IterativeRobot {
     	//System.out.println(RobotMap.shooter.getAngleAbsolute());
     	//System.out.println(RobotMap.arm.getShoulderPosition());
 //    	System.out.println(RobotMap.shooter.getAngleAbsolute());
+    	
+//    	RobotMap.shooter.setWedgeSpeed(RobotMap.oi.getOperatorJoystick().getRawAxis(1));
+    	
     	logger.log();
 	}
-
+    
 	@Override
 	public void autonomousInit() {
 		RobotMap.drivetrain.isTeleop = false;
 		enabledInit();
+		  autonomousCommand = (Command) chooser.getSelected();
+//        
+		
+    	// schedule the autonomous command (example)
+        if (autonomousCommand != null) autonomousCommand.start();
 //		if (autonomousCommand != null) autonomousCommand.start();
-		if(autosequence != null) autosequence.start();
+//		if(autonomousOver!= null) autonomousOver.start();
 //		if(driveStraight !=null) driveStraight.start();
 //		if(turnRight !=null) turnRight.start();
 	}
@@ -144,8 +160,8 @@ public class Robot extends IterativeRobot {
 		enabledInit();
 		//Move to Auto Init
 		
-		 ServerThread = new Thread(new Server(RobotMap.serversocket));
-		 ServerThread.start();
+//		 ServerThread = new Thread(new Server(RobotMap.serversocket));
+//		 ServerThread.start();
 //		System.out.println("Start Heading : " + RobotMap.autonomous.startHeading);
 	}
 	@Override
@@ -154,7 +170,8 @@ public class Robot extends IterativeRobot {
 	}
 	@Override
 	public void testPeriodic() {
-		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
+//		System.out.println(i2c.);
+//		 RobotMap.drivetrain.tankDrive(-1 * RobotMap.oi.getDriverJoystick().getRawAxis(1), -1 * RobotMap.oi.getDriverJoystick().getRawAxis(5)); //Might need to flip
 	}
 	
 	/**

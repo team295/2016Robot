@@ -5,16 +5,18 @@ import org.usfirst.frc.team295.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomousSequence extends CommandGroup {
+public class AutonomousUnder extends CommandGroup {
 
 	double dZeroTurn;
 	double dZeroAngle;
-	public AutonomousSequence(){
+	public AutonomousUnder(){
 		
 		RobotMap.ahrs.reset();
 		dZeroAngle = RobotMap.ahrs.getAngle();
-		addSequential(new SetShooterAngleAbsolute(50000));
-		addSequential(new AutoDrive(2, .5, 1));
+		addSequential(new SetShooterAngleAbsolute(75000));
+		
+		addSequential(new LowerShoulder(20000));
+//		addSequential(new AutoDrive(3, .5, 1));
 //		addSequential(new ZeroDrive());
 //		dZeroTurn = dZeroAngle - RobotMap.ahrs.getAngle();
 //		if(dZeroTurn > 0){
@@ -23,7 +25,7 @@ public class AutonomousSequence extends CommandGroup {
 //		else if(dZeroTurn < 0 ){
 //			addSequential(new PIDTurnLeft(dZeroTurn));
 //		}
-		addSequential(new PIDTurnRight(45));
+//		addSequential(new PIDTurnRight(45));
 		
 //		addSequential(new SetShooterAngleAbsolute(Shooter.HIGH_SHOOT));
 //		System.out.println("1");

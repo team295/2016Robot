@@ -1,5 +1,7 @@
 package org.usfirst.frc.team295.robot.commands;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+
 import org.usfirst.frc.team295.robot.RobotMap;
 import org.usfirst.frc.team295.robot.subsystems.Arm;
 import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
@@ -28,24 +30,40 @@ public class ArmManual extends Command {
 		//arm.setShoulderAbsolute(-Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(5)), 1) * 30000);
 		//arm.setElbowAbsolute(Math.pow(UtilityFunctions.deadband(operatorJoystick.getRawAxis(1)), 3) * 40000);
 		
-		/*if(operatorJoystick.getRawButton(2)) {
+		if(operatorJoystick.getRawButton(3)) {
 			arm.setShoulderAbsolute(-15000);
-		} else if(operatorJoystick.getRawButton(1)) {
+		} else if(operatorJoystick.getRawButton(2)) {
 			arm.setShoulderAbsolute(15000);
 		} else {
 			arm.setShoulderAbsolute(0);
 		}
 		
-		if(operatorJoystick.getRawButton(16)) {
+		if(operatorJoystick.getRawButton(15)) {
 			arm.setElbowAbsolute(20000);
-		} else if(operatorJoystick.getRawButton(15)) {
+		} else if(operatorJoystick.getRawButton(14)) {
 			arm.setElbowAbsolute(-20000);
 		} else {
 			arm.setElbowAbsolute(0);
-		}*/
+		}
 		
-		//arm.setElbowAbsolute(operatorJoystick.getRawAxis(0) * 50000);
-		arm.setShoulderAbsolute(operatorJoystick.getRawAxis(1) * 50000);
+		/*arm.currentAngleS = operatorJoystick.getRawAxis(0);
+		if(arm.currentAngleS > 0.75 && arm.previousAngleS < -0.75) {
+			arm.angleS--;
+		} else if(arm.currentAngleS < -0.75 && arm.previousAngleS > 0.75) {
+			arm.angleS++;
+		}
+		
+		arm.currentAngleE = operatorJoystick.getRawAxis(1);
+		if(arm.currentAngleE > 0.75 && arm.previousAngleE < -0.75) {
+			arm.angleE--;
+		} else if(arm.currentAngleE < -0.75 && arm.previousAngleE > 0.75) {
+			arm.angleE++;
+		}
+		
+		arm.setElbowAbsolute((arm.currentAngleS + arm.angleS) * 50000);
+		arm.setShoulderAbsolute((arm.currentAngleE + arm.angleE) * 50000);
+		
+		System.out.println(operatorJoystick.getRawAxis(1) + " " + arm.getShoulderPosition());*/
 	}
 
 	@Override

@@ -1,24 +1,23 @@
 package org.usfirst.frc.team295.robot.commands;
 
 import org.usfirst.frc.team295.robot.RobotMap;
-import org.usfirst.frc.team295.robot.subsystems.Shooter;
-import org.usfirst.frc.team295.robot.utilities.UtilityFunctions;
+import org.usfirst.frc.team295.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetShooterAngleAbsolute extends Command {
+public class LowerShoulder extends Command {
 
-	private Shooter shooter;
+	private Arm arm;
 
-	private double angle;
+	//private double angle;
 	private double startTime;
 	
-	public SetShooterAngleAbsolute(double angle) {
-		shooter = RobotMap.shooter;
-		requires(shooter);
-		this.angle = angle;		
+	public LowerShoulder(double angle) {
+		arm = RobotMap.arm;
+		requires(arm);
+		//this.angle = angle;		
 		
 	}
 	
@@ -26,15 +25,13 @@ public class SetShooterAngleAbsolute extends Command {
 	protected void initialize() {
 		startTime = Timer.getFPGATimestamp();
 		
-		shooter.angleMotor.configPeakOutputVoltage(4, -12); //2.5, -4.4
-		shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-		shooter.angleMotor.setProfile(0);
+		arm.shoulder.configPeakOutputVoltage(5, -2.5); //2.5, -4.4
+		arm.shoulder.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 	}
 
 	@Override
 	protected void execute() {
-		shooter.setAngleAbsolute(angle);
-		shooter.shooterAngle = shooter.getAngleAbsolute();
+		arm.setShoulderAbsolute(0.4);
 	}
 
 	@Override
@@ -44,12 +41,14 @@ public class SetShooterAngleAbsolute extends Command {
 		//return (Math.abs(RobotMap.shooter.getAngleAbsolute()) - angle < UtilityFunctions.encoderFinish);
 		//System.out.println("Not done");
 		//return Math.abs(RobotMap.shooter.getAngleAbsolute() - (angle * 1.4)) < UtilityFunctions.encoderFinish;
-		return Timer.getFPGATimestamp() - 1.8 >= startTime;
+		return Timer.getFPGATimestamp() - 3 >= startTime;
 	}
 
 	@Override
 	protected void end() {
-		//shooter.setAngleRelative(0);
+		arm.shoulder.configPeakOutputVoltage(12f, -12f); //2.5, -4.4
+		arm.shoulder.changeControlMode(CANTalon.TalonControlMode.Speed);
+		arm.shoulder.setProfile(1);
 	}
 
 	@Override

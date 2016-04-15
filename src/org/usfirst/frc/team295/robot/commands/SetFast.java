@@ -4,12 +4,9 @@ import org.usfirst.frc.team295.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveShiftArm extends Command{
-	
-	public DriveShiftArm(){
-
+public class SetFast extends Command{
+	public SetFast(){
 	}
-	
 	@Override
 	protected void initialize() {
 		
@@ -17,7 +14,7 @@ public class DriveShiftArm extends Command{
 
 	@Override
 	protected void execute() {
-		RobotMap.drivetrain.setDirection(-1);
+		RobotMap.drivetrain.setFast(true);
 		//System.out.println("DriveForward : " + RobotMap.drivetrain.getDirection());
 	}
 

@@ -32,8 +32,8 @@ public class AutoDrive extends Command{
 		startTime = Timer.getFPGATimestamp();
 		ahrs = RobotMap.ahrs;
 		dFront = ahrs.getYaw();
-		System.out.println("Drive Started");
-		System.out.println("Angle Initial : " + ahrs.getAngle());
+//		System.out.println("Drive Started");
+//		System.out.println("Angle Initial : " + ahrs.getAngle());
 	}
 
 	@Override
@@ -48,15 +48,15 @@ public class AutoDrive extends Command{
 			dKpDiff = -(dDiff)*Kp;
 			RobotMap.autonomous.drive(-dSpeed, dKpDiff);	
 		}
-		System.out.println("Error : " + dDiff + "Error*KP : " + dKpDiff + "dSpeed : " + dSpeed);
+//		System.out.println("Error : " + dDiff + "Error*KP : " + dKpDiff + "dSpeed : " + dSpeed);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub3
-		System.out.println("Driving");
+//		System.out.println("Driving");
 		if(Timer.getFPGATimestamp() > startTime + dTime){
-			System.out.println("Drive ended");
+//			System.out.println("Drive ended");
 			return true;
 		}
 		else{

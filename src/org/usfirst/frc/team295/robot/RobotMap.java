@@ -43,12 +43,12 @@ public class RobotMap {
 		
 		// flightRecorder = new FlightRecorder();
 		 camera = new Camera();
-		 try {
-				serversocket = new ServerSocket(5800);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		 try {
+//				serversocket = new ServerSocket(5800);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 	}
 
 }
