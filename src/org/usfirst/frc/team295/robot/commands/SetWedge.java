@@ -30,7 +30,7 @@ public class SetWedge extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		return Timer.getFPGATimestamp() - 0.6 >= startTime;
+		return Timer.getFPGATimestamp() - .3 >= startTime;
     }
 
     // Called once after isFinished returns true

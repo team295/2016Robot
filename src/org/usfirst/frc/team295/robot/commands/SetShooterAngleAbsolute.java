@@ -26,7 +26,7 @@ public class SetShooterAngleAbsolute extends Command {
 	protected void initialize() {
 		startTime = Timer.getFPGATimestamp();
 		
-		shooter.angleMotor.configPeakOutputVoltage(10, -12); //2.5, -4.4
+		shooter.angleMotor.configPeakOutputVoltage(4, -12); //2.5, -4.4
 		shooter.angleMotor.changeControlMode(CANTalon.TalonControlMode.Position);
 		shooter.angleMotor.setProfile(0);
 	}
