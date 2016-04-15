@@ -21,7 +21,10 @@ public class UltrasonicSensor extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return RobotMap.us.read() <= distance;
+		if(RobotMap.usSensor.getValue() == 0) {
+			return false;
+		}
+		return RobotMap.usSensor.getValue() <= distance;
 	}
 
 	@Override

@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 	
     @Override
     public void teleopPeriodic() {
+    	System.out.println(RobotMap.usSensor.getValue());
     	enabledPeriodic();
     	Scheduler.getInstance().run();
     	camera.loop();
@@ -137,7 +138,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		RobotMap.drivetrain.isTeleop = false;
 		enabledInit();
-		  autonomousCommand = (Command) chooser.getSelected();
+		  autonomousCommand = new Auto5Low();//(Command) chooser.getSelected();
 //        
 		
     	// schedule the autonomous command (example)

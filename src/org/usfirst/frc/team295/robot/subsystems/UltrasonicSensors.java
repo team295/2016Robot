@@ -1,17 +1,21 @@
 package org.usfirst.frc.team295.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.PWM;
 
 public class UltrasonicSensors {
 
-	private AnalogInput sensor;
+	private PWM sensor;
 	
 	public UltrasonicSensors() {
-		sensor = new AnalogInput(3);
+		try {
+			//sensor = new PWM(8);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int read() {
-		return sensor.getValue();
+		return sensor.getRaw();
 	}
 	
 }

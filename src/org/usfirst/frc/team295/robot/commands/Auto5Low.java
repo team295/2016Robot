@@ -17,12 +17,21 @@ public class Auto5Low extends CommandGroup{
 //	addSequential(new SetShooterAngleAbsolute(145350.0/1.4));
 //	addSequential(new WaitCommand(2));
 //	
-	addSequential(new SpinUpShooter(1));
+	//addSequential(new SpinUpShooter(1));
 	
-	addSequential(new WaitCommand(2));
-//	shooter.setSpeed(0,0);
+	//DAVID, this stuff here.
+	addSequential(new AutoDrive(3.5, .8, 1));
+	addSequential(new WaitCommand(1));
+	addSequential(new AutoDriveToWall(450, 0.3, 1)); //Drives until it detects wall in front
+	addSequential(new AutoTurn(45, 1)); //Turn does not work, the rest of it does
+	addSequential(new SetShooterAngleAbsolute(145350.0/1.4));
+	addSequential(new SpinUpShooter(1));
 	addSequential(new SetWedge(-1));
 	addSequential(new SpinUpShooter(0));
+	
+	//addSequential(new WaitCommand(2));
+//	shooter.setSpeed(0,0);
+	//addSequential(new SetWedge(-1));
 	
 //	addSequential(new AutoDrive(4.5, .7, 1));
 //	addSequential(new AutoDrive(.5, .5, -1));

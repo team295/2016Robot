@@ -1,6 +1,5 @@
 package org.usfirst.frc.team295.robot;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 
 import org.usfirst.frc.team295.robot.subsystems.Arm;
@@ -8,14 +7,14 @@ import org.usfirst.frc.team295.robot.subsystems.Autonomous;
 import org.usfirst.frc.team295.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team295.robot.subsystems.OI;
 import org.usfirst.frc.team295.robot.subsystems.Shooter;
-import org.usfirst.frc.team295.robot.subsystems.UltrasonicSensors;
 import org.usfirst.frc.team295.robot.utilities.Camera;
 import org.usfirst.frc.team295.robot.utilities.FlightRecorder;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class RobotMap {
 
@@ -30,7 +29,9 @@ public class RobotMap {
 
 	public static ServerSocket serversocket;
 
-	public static UltrasonicSensors us;
+	//public static UltrasonicSensors us;
+	
+	public static AnalogInput usSensor;
 	
 	public static void init() {
 		ahrs = new AHRS(SPI.Port.kMXP);
@@ -39,7 +40,8 @@ public class RobotMap {
 		arm = new Arm();
 		drivetrain = new Drivetrain();
 		oi = new OI();
-		us = new UltrasonicSensors();
+		//us = new UltrasonicSensors();
+		usSensor = new AnalogInput(2);
 		
 		// flightRecorder = new FlightRecorder();
 		 camera = new Camera();
